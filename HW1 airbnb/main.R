@@ -1,9 +1,9 @@
 library(stringr)
 
 #Get the data
-#malagaCal <- read.csv(file = 'data/malaga/calendar.csv')
-#mallorcaCal <- read.csv(file = 'data/mallorca/calendar.csv')
-#sevillaCal <- read.csv(file = 'data/sevilla/calendar.csv')
+malagaCal <- read.csv(file = 'data/malaga/calendar.csv')
+mallorcaCal <- read.csv(file = 'data/mallorca/calendar.csv')
+sevillaCal <- read.csv(file = 'data/sevilla/calendar.csv')
 
 #Add the city
 malagaCal$city="malaga"
@@ -37,6 +37,8 @@ head(avgAvailability)
 #####################
 #Cleaning the prices
 calendars$adjusted_price <- str_replace_all(calendars$adjusted_price,"\\$","")
+calendars$adjusted_price <- str_replace_all(calendars$adjusted_price,",","")
+calendars$adjusted_price[calendars$adjusted_price==""] <- 0
 calendars$adjusted_price <- as.numeric(calendars$adjusted_price)
 
 #Computing the average revenue over 30 days
