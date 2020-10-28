@@ -1,3 +1,5 @@
+library(stringr)
+
 #Get the data
 #malagaCal <- read.csv(file = 'data/malaga/calendar.csv')
 #mallorcaCal <- read.csv(file = 'data/mallorca/calendar.csv')
@@ -11,6 +13,11 @@ sevillaCal$city="sevilla"
 #concatenate all the data
 calendars <- rbind(malagaCal, mallorcaCal, sevillaCal)
 
+
+#####################
+##### Analysis 1 ####
+##### Point 1&2 #####
+#####################
 #preprocess the availability
 calendars$available[calendars$available=="t"] <- 1
 calendars$available[calendars$available=="f"] <- 0
@@ -21,16 +28,104 @@ avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$cit
 names(avgAvailability) <- c("listing_id","availability")
 avgAvailability$availability <- avgAvailability$availability * 30
 
-#Point 1&2
 head(avgAvailability)
 
-#Point 3&4
 
-#Point 5
+#####################
+##### Analysis 1 ####
+##### Point 3&4 #####
+#####################
+#Cleaning the prices
+calendars$adjusted_price <- str_replace_all(calendars$adjusted_price,"\\$","")
+calendars$adjusted_price <- as.numeric(calendars$adjusted_price)
 
-#Point 6
+#Computing the average revenue over 30 days
+calendars$revenue <- (1-calendars$available) * calendars$adjusted_price
+avgRevenue <- aggregate(calendars$revenue, by=list(Category=calendars$city), FUN=mean)
+names(avgRevenue) <- c("listing_id","revenue")
 
-#Point 7
+head(avgRevenue)
 
-#Point 8
 
+###################
+#### Analysis 1 ###
+##### Point 5 #####
+###################
+
+
+
+###################
+#### Analysis 1 ###
+##### Point 6 #####
+###################
+
+
+
+###################
+#### Analysis 1 ###
+##### Point 7 #####
+###################
+
+
+
+###################
+#### Analysis 1 ###
+##### Point 8 #####
+###################
+
+
+
+
+###################
+#### Analysis 2 ###
+##### Point 1 #####
+###################
+
+
+
+###################
+#### Analysis 2 ###
+##### Point 2 #####
+###################
+
+
+
+###################
+#### Analysis 2 ###
+##### Point 3 #####
+###################
+
+
+
+###################
+#### Analysis 2 ###
+##### Point 4 #####
+###################
+
+
+
+###################
+#### Analysis 2 ###
+##### Point 5 #####
+###################
+
+
+
+###################
+#### Analysis 2 ###
+##### Point 6 #####
+###################
+
+
+
+###################
+#### Analysis 2 ###
+##### Point 7 #####
+###################
+
+
+
+###################
+#### Analysis 2 ###
+##### Point 8 #####
+###################
