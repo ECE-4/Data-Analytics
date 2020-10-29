@@ -121,8 +121,9 @@ print(avgRevenue)
 #Computing the proportion
 roomTypes <- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
 names(roomTypes) <- c("room_type","proportion")
-roomTypes$proportion <- roomTypes$proportion / sum(roomTypes$proportion)
-roomTypes$proportion <- percent(roomTypes$proportion)
+roomTypes$proportion <- roomTypes$proportion / sum(roomTypes$proportion) #compute a %
+roomTypes <- roomTypes[order(roomTypes$proportion, decreasing = TRUE),] #sort
+roomTypes$proportion <- percent(roomTypes$proportion) #convert to %
 
 #Printing
 cat("\nAnalysis 2 - Q1\n")
@@ -136,8 +137,9 @@ print(roomTypes)
 #Computing the proportion
 houseSize <- aggregate(listings$bedrooms, by=list(Category=listings$bedrooms), FUN=length)
 names(houseSize) <- c("bedrooms","proportion")
-houseSize$proportion <- houseSize$proportion / sum(houseSize$proportion)
-houseSize$proportion <- percent(houseSize$proportion)
+houseSize$proportion <- houseSize$proportion / sum(houseSize$proportion) #compute a %
+houseSize <- houseSize[order(houseSize$proportion, decreasing = TRUE),] #sort
+houseSize$proportion <- percent(houseSize$proportion) #convert to %
 
 #Printing
 cat("\nAnalysis 2 - Q2\n")
@@ -148,15 +150,16 @@ print(houseSize)
 #### Analysis 2 ###
 ##### Point 3 #####
 ###################
-#Computing the proportion
-neighbourhoodProportion <- aggregate(listings$neighbourhood_group_cleansed, by=list(Category=listings$neighbourhood_group_cleansed), FUN=length)
-names(neighbourhoodProportion) <- c("neighbourhood_group_cleansed","proportion")
-neighbourhoodProportion$proportion <- neighbourhoodProportion$proportion / sum(neighbourhoodProportion$proportion)
-neighbourhoodProportion$proportion <- percent(neighbourhoodProportion$proportion)
+#Computing the neighbourhood proportion
+nbhProp <- aggregate(listings$neighbourhood_group_cleansed, by=list(Category=listings$neighbourhood_group_cleansed), FUN=length)
+names(nbhProp) <- c("neighbourhood_group_cleansed","proportion")
+nbhProp$proportion <- nbhProp$proportion / sum(nbhProp$proportion) #compute a %
+nbhProp <- nbhProp[order(nbhProp$proportion, decreasing = TRUE),] #sort
+nbhProp$proportion <- percent(nbhProp$proportion) #convert to %
 
 #Printing
 cat("\nAnalysis 2 - Q3\n")
-print(neighbourhoodProportion)
+print(nbhProp)
 
 
 ###################
