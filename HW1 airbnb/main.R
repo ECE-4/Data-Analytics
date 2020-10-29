@@ -39,6 +39,13 @@ listings <- dplyr::bind_rows(malagaList, mallorcaList, sevillaList)
 cat("Done\n")
 
 
+#Will be useful to print pretty proportions
+percent <- function(x, digits = 2, format = "f", ...) {
+  paste0(formatC(x * 100, format = format, digits = digits, ...), " %")
+}
+
+
+
 #####################
 ##### Analysis 1 ####
 ##### Point 1&2 #####
@@ -111,21 +118,29 @@ print(avgRevenue)
 #### Analysis 2 ###
 ##### Point 1 #####
 ###################
-
-
 #Computing the proportion
-rooms <- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
-names(rooms) <- c("room_type","proportion")
-rooms$proportion <- rooms$proportion / nrow(listings)
+roomTypes <- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
+names(roomTypes) <- c("room_type","proportion")
+roomTypes$proportion <- roomTypes$proportion / sum(roomTypes$proportion)
+roomTypes$proportion <- percent(roomTypes$proportion)
 
 #Printing
 cat("\nAnalysis 2 - Q1\n")
-print(rooms)
+print(roomTypes)
 
 ###################
 #### Analysis 2 ###
 ##### Point 2 #####
 ###################
+#Computing the proportion
+houseSize <- aggregate(listings$bedrooms, by=list(Category=listings$bedrooms), FUN=length)
+names(houseSize) <- c("bedrooms","proportion")
+houseSize$proportion <- houseSize$proportion / sum(houseSize$proportion)
+houseSize$proportion <- percent(houseSize$proportion)
+
+#Printing
+cat("\nAnalysis 2 - Q2\n")
+print(houseSize)
 
 
 
