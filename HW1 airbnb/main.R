@@ -1,6 +1,10 @@
 library(stringr)
 library(dplyr)
 
+#####################
+#### Importation ####
+#####################
+cat("Getting Calendars... ")
 #Get the data
 malagaCal <- read.csv(file = 'data/malaga/calendar.csv')
 mallorcaCal <- read.csv(file = 'data/mallorca/calendar.csv')
@@ -13,6 +17,26 @@ sevillaCal$city="sevilla"
 
 #concatenate all the data
 calendars <- rbind(malagaCal, mallorcaCal, sevillaCal)
+
+cat("Done\n")
+
+
+cat("Getting Listing... ")
+#Get the data
+malagaList <- read.csv(file = 'data/malaga/listings.csv')
+mallorcaList <- read.csv(file = 'data/mallorca/listings.csv')
+sevillaList <- read.csv(file = 'data/sevilla/listings.csv')
+
+#Add the city
+malagaList$city="malaga"
+mallorcaList$city="mallorca"
+sevillaList$city="sevilla"
+
+#concatenate all the data
+listings <- dplyr::bind_rows(malagaList, mallorcaList, sevillaList)
+#Note: The mallorca dataframe doesnt have the same columns as the other sets, so the bind_rows function will put NA when there is no data
+
+cat("Done\n")
 
 
 #####################
@@ -29,7 +53,9 @@ avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$cit
 names(avgAvailability) <- c("listing_id","availability")
 avgAvailability$availability <- avgAvailability$availability * 30
 
-head(avgAvailability)
+#Printing
+cat("\nAnalysis 1 - Q1&2\n")
+print(avgAvailability)
 
 
 #####################
@@ -47,7 +73,9 @@ calendars$revenue <- (1-calendars$available) * calendars$adjusted_price
 avgRevenue <- aggregate(calendars$revenue, by=list(Category=calendars$city), FUN=mean)
 names(avgRevenue) <- c("listing_id","revenue")
 
-head(avgRevenue)
+#Printing
+cat("\nAnalysis 1 - Q3&4\n")
+print(avgRevenue)
 
 
 ###################
@@ -83,20 +111,16 @@ head(avgRevenue)
 #### Analysis 2 ###
 ##### Point 1 #####
 ###################
-#Get the data
-malagaList <- read.csv(file = 'data/malaga/listings.csv')
-mallorcaList <- read.csv(file = 'data/mallorca/listings.csv')
-sevillaList <- read.csv(file = 'data/sevilla/listings.csv')
 
-#Add the city
-malagaList$city="malaga"
-mallorcaList$city="mallorca"
-sevillaList$city="sevilla"
 
-#concatenate all the data
-listings <- dplyr::bind_rows(malagaList, mallorcaList, sevillaList)
-#Note: The mallorca dataframe doesnt have the same columns as the other sets, to the bind_rows function will put NA 
+#Computing the proportion
+rooms <- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
+names(rooms) <- c("room_type","proportion")
+rooms$proportion <- rooms$proportion / nrow(listings)
 
+#Printing
+cat("\nAnalysis 2 - Q1\n")
+print(rooms)
 
 ###################
 #### Analysis 2 ###
