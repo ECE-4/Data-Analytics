@@ -128,6 +128,7 @@ roomTypes$proportion <- percent(roomTypes$proportion)
 cat("\nAnalysis 2 - Q1\n")
 print(roomTypes)
 
+
 ###################
 #### Analysis 2 ###
 ##### Point 2 #####
@@ -143,12 +144,19 @@ cat("\nAnalysis 2 - Q2\n")
 print(houseSize)
 
 
-
 ###################
 #### Analysis 2 ###
 ##### Point 3 #####
 ###################
+#Computing the proportion
+neighbourhoodProportion <- aggregate(listings$neighbourhood_group_cleansed, by=list(Category=listings$neighbourhood_group_cleansed), FUN=length)
+names(neighbourhoodProportion) <- c("neighbourhood_group_cleansed","proportion")
+neighbourhoodProportion$proportion <- neighbourhoodProportion$proportion / sum(neighbourhoodProportion$proportion)
+neighbourhoodProportion$proportion <- percent(neighbourhoodProportion$proportion)
 
+#Printing
+cat("\nAnalysis 2 - Q3\n")
+print(neighbourhoodProportion)
 
 
 ###################
