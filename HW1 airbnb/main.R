@@ -1,4 +1,5 @@
 library(stringr)
+library(dplyr)
 
 #Get the data
 malagaCal <- read.csv(file = 'data/malaga/calendar.csv')
@@ -82,7 +83,19 @@ head(avgRevenue)
 #### Analysis 2 ###
 ##### Point 1 #####
 ###################
+#Get the data
+malagaList <- read.csv(file = 'data/malaga/listings.csv')
+mallorcaList <- read.csv(file = 'data/mallorca/listings.csv')
+sevillaList <- read.csv(file = 'data/sevilla/listings.csv')
 
+#Add the city
+malagaList$city="malaga"
+mallorcaList$city="mallorca"
+sevillaList$city="sevilla"
+
+#concatenate all the data
+listings <- dplyr::bind_rows(malagaList, mallorcaList, sevillaList)
+#Note: The mallorca dataframe doesnt have the same columns as the other sets, to the bind_rows function will put NA 
 
 
 ###################
