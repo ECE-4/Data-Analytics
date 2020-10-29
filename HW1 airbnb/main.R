@@ -122,7 +122,7 @@ print(avgRevenue)
 roomTypes <- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
 names(roomTypes) <- c("room_type","proportion")
 roomTypes$proportion <- roomTypes$proportion / sum(roomTypes$proportion) #compute a %
-roomTypes <- roomTypes[order(roomTypes$proportion, decreasing = TRUE),] #sort
+roomTypes <- arrange(nbhProp, desc(proportion)) #sort
 roomTypes$proportion <- percent(roomTypes$proportion) #convert to %
 
 #Printing
@@ -138,7 +138,7 @@ print(roomTypes)
 houseSize <- aggregate(listings$bedrooms, by=list(Category=listings$bedrooms), FUN=length)
 names(houseSize) <- c("bedrooms","proportion")
 houseSize$proportion <- houseSize$proportion / sum(houseSize$proportion) #compute a %
-houseSize <- houseSize[order(houseSize$proportion, decreasing = TRUE),] #sort
+houseSize <- arrange(nbhProp, desc(proportion)) #sort
 houseSize$proportion <- percent(houseSize$proportion) #convert to %
 
 #Printing
@@ -154,7 +154,7 @@ print(houseSize)
 nbhProp <- aggregate(listings$neighbourhood_group_cleansed, by=list(Category=listings$neighbourhood_group_cleansed), FUN=length)
 names(nbhProp) <- c("neighbourhood_group_cleansed","proportion")
 nbhProp$proportion <- nbhProp$proportion / sum(nbhProp$proportion) #compute a %
-nbhProp <- nbhProp[order(nbhProp$proportion, decreasing = TRUE),] #sort
+nbhProp <- arrange(nbhProp, desc(proportion)) #sort
 nbhProp$proportion <- percent(nbhProp$proportion) #convert to %
 
 #Printing
