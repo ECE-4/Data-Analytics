@@ -110,7 +110,7 @@ listings$revenue_30 <- listings$availability_30 * listings$price
 res <- aggregate(listings$revenue_30 , by = list(listings$city), FUN=mean)
 names(res) <- c("city","revenue_next_30d")
 #Printing
-cat("\nAnalysis 1 - Q5\n")
+cat("\nAnalysis 1 - Q6\n")
 print(res)
 
 
@@ -119,8 +119,12 @@ print(res)
 ##### Point 7 #####
 ###################
 
-date_today <- Sys.Date()
-date_study <- date_today + 30 #add 30 days 
+listings$revenue_30 <- listings$availability_30 * listings$price
+res <- aggregate(listings$revenue_30 , by = list(listings$city~listings_bedrooms), FUN=mean)
+names(res) <- c("city","revenue_next_30d")
+#Printing
+cat("\nAnalysis 1 - Q7\n")
+print(res)
 
 ###################
 #### Analysis 1 ###
