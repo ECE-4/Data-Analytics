@@ -92,6 +92,7 @@ print(avgRevenue)
 
 res <- aggregate(listings$availability_30, by = list(listings$city), FUN=mean)
 names(res) <- c("city","avg_next_30d")
+
 #Printing
 cat("\nAnalysis 1 - Q5\n")
 print(res)
@@ -109,6 +110,7 @@ listings$price <- as.numeric(listings$price)
 listings$revenue_30 <- listings$availability_30 * listings$price
 res <- aggregate(listings$revenue_30 , by = list(listings$city), FUN=mean)
 names(res) <- c("city","revenue_next_30d")
+
 #Printing
 cat("\nAnalysis 1 - Q6\n")
 print(res)
@@ -119,19 +121,22 @@ print(res)
 ##### Point 7 #####
 ###################
 
-listings$revenue_30 <- listings$availability_30 * listings$price
-res <- aggregate(listings$revenue_30 , by = list(listings$city~listings_bedrooms), FUN=mean)
-names(res) <- c("city","revenue_next_30d")
+revenue_by_bedroom_size <- cast(listings, city ~ bedrooms, length)
+
 #Printing
 cat("\nAnalysis 1 - Q7\n")
-print(res)
+print(revenue_by_bedroom_size)
 
 ###################
 #### Analysis 1 ###
 ##### Point 8 #####
 ###################
 
+revenue_by_roomtype<- cast(listings, city ~ room_type, length)
 
+#Printing
+cat("\nAnalysis 1 - Q7\n")
+print(revenue_by_roomtype)
 
 
 ###################
