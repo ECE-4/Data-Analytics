@@ -1,5 +1,6 @@
 library(stringr)
 library(dplyr)
+library(reshape)
 
 #####################
 #### Importation ####
@@ -51,9 +52,7 @@ percent <- function(x, digits = 2, format = "f", ...) {
 ##### Point 1&2 #####
 #####################
 #preprocess the availability
-calendars$available[calendars$available=="t"] <- 1
-calendars$available[calendars$available=="f"] <- 0
-calendars$available <- as.numeric(calendars$available)
+mutate(calendars, available = ifelse(available=="t", 1, 0))
 
 #Compute the availability over 30 days
 avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
