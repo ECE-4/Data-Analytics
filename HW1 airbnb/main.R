@@ -104,7 +104,11 @@ print(avgRevenue)
 ##### Point 7 #####
 ###################
 
+date_today <- Sys.Date()
+date_study <- date_today + 30 #add 30 days 
 
+listings_8 <- subset(listings, listings$date > date_today & listings$date < date_study)
+sumrevenue_8 <- aggregate(listings_8, listings$revenue, by=list(Category = listings$city), FUN=sum) #pas encore trié par nombre de chambres et retirer des colonnes
 
 ###################
 #### Analysis 1 ###
