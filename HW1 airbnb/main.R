@@ -90,7 +90,11 @@ print(avgRevenue)
 ##### Point 5 #####
 ###################
 
-
+res <- aggregate(listings$availability_30, by = list(listings$city), FUN=mean)
+names(res) <- c("city","avg_next_30d")
+#Printing
+cat("\nAnalysis 1 - Q5\n")
+print(avgRevenue)
 
 ###################
 #### Analysis 1 ###
@@ -106,9 +110,6 @@ print(avgRevenue)
 
 date_today <- Sys.Date()
 date_study <- date_today + 30 #add 30 days 
-
-listings_8 <- subset(listings, listings$date > date_today & listings$date < date_study)
-sumrevenue_8 <- aggregate(listings_8, listings$revenue, by=list(Category = listings$city), FUN=sum) #pas encore trié par nombre de chambres et retirer des colonnes
 
 ###################
 #### Analysis 1 ###
