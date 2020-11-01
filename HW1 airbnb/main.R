@@ -94,13 +94,24 @@ res <- aggregate(listings$availability_30, by = list(listings$city), FUN=mean)
 names(res) <- c("city","avg_next_30d")
 #Printing
 cat("\nAnalysis 1 - Q5\n")
-print(avgRevenue)
+print(res)
 
 ###################
 #### Analysis 1 ###
 ##### Point 6 #####
 ###################
 
+listings$price <- str_replace_all(listings$price,"\\$","")
+listings$price <- str_replace_all(listings$price,",","")
+listings$price[listings$price==""] <- 0
+listings$price <- as.numeric(listings$price)
+
+listings$revenue_30 <- listings$availability_30 * listings$price
+res <- aggregate(listings$revenue_30 , by = list(listings$city), FUN=mean)
+names(res) <- c("city","revenue_next_30d")
+#Printing
+cat("\nAnalysis 1 - Q5\n")
+print(res)
 
 
 ###################
