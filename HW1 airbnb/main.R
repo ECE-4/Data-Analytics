@@ -46,13 +46,12 @@ percent <- function(x, digits = 2, format = "f", ...) {
 }
 
 
-
 #####################
 ##### Analysis 1 ####
 ##### Point 1&2 #####
 #####################
 #preprocess the availability
-mutate(calendars, available = ifelse(available=="t", 1, 0))
+calendars$available <- ifelse(calendars$available=="t", 1, 0)
 
 #Compute the availability over 30 days
 avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
@@ -191,6 +190,11 @@ print(nbhProp)
 ##### Point 4 #####
 ###################
 
+revenue_by_bedroom_size <- cast(listings, city ~ room_type, length)
+
+#Printing
+cat("\nAnalysis 1 - Q7\n")
+print(revenue_by_bedroom_size)
 
 
 ###################
