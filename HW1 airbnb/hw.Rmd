@@ -1,0 +1,36 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+text
+```{r}
+code
+```
+
+text
+```{r}
+code
+```
+
+text
+```{r}
+code
+```
+
+text
+```{r}
+code
+```
+
+text
+```{r}
+code
+```
+
+text
+```{r}
+code
+```
+
+
