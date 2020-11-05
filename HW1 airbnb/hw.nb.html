@@ -1797,57 +1797,399 @@ summary {
 
 
 <!-- rnb-text-begin -->
-<p>text</p>
+<div id="importation" class="section level1">
+<h1>Importation</h1>
+<hr />
+<div id="importing-libraries" class="section level3">
+<h3>Importing libraries</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZVxuYGBgIn0= -->
-<pre class="r"><code>code</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShzdHJpbmdyKVxubGlicmFyeShkcGx5cilcbmxpYnJhcnkocmVzaGFwZSlcbmBgYCJ9 -->
+<pre class="r"><code>library(stringr)
+library(dplyr)
+library(reshape)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>text</p>
+<hr />
+</div>
+<div id="getting-calendars" class="section level3">
+<h3>Getting Calendars</h3>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZVxuYGBgIn0= -->
-<pre class="r"><code>code</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>text</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZVxuYGBgIn0= -->
-<pre class="r"><code>code</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>text</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZVxuYGBgIn0= -->
-<pre class="r"><code>code</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>text</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZVxuYGBgIn0= -->
-<pre class="r"><code>code</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<p>text</p>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29kZVxuYGBgIn0= -->
-<pre class="r"><code>code</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0dldCB0aGUgZGF0YVxubWFsYWdhQ2FsIDwtIHJlYWQuY3N2KGZpbGUgPSAnZGF0YS9tYWxhZ2EvY2FsZW5kYXIuY3N2Jylcbm1hbGxvcmNhQ2FsIDwtIHJlYWQuY3N2KGZpbGUgPSAnZGF0YS9tYWxsb3JjYS9jYWxlbmRhci5jc3YnKVxuc2V2aWxsYUNhbCA8LSByZWFkLmNzdihmaWxlID0gJ2RhdGEvc2V2aWxsYS9jYWxlbmRhci5jc3YnKVxuXG4jQWRkIHRoZSBjaXR5XG5tYWxhZ2FDYWwkY2l0eT1cIm1hbGFnYVwiXG5tYWxsb3JjYUNhbCRjaXR5PVwibWFsbG9yY2FcIlxuc2V2aWxsYUNhbCRjaXR5PVwic2V2aWxsYVwiXG5cbiNjb25jYXRlbmF0ZSBhbGwgdGhlIGRhdGFcbmNhbGVuZGFycyA8LSByYmluZChtYWxhZ2FDYWwsIG1hbGxvcmNhQ2FsLCBzZXZpbGxhQ2FsKVxuYGBgIn0= -->
+<pre class="r"><code>#Get the data
+malagaCal &lt;- read.csv(file = &#39;data/malaga/calendar.csv&#39;)
+mallorcaCal &lt;- read.csv(file = &#39;data/mallorca/calendar.csv&#39;)
+sevillaCal &lt;- read.csv(file = &#39;data/sevilla/calendar.csv&#39;)
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQp0ZXh0DQpgYGB7cn0NCmNvZGUNCmBgYA0KDQp0ZXh0DQpgYGB7cn0NCmNvZGUNCmBgYA0KDQp0ZXh0DQpgYGB7cn0NCmNvZGUNCmBgYA0KDQp0ZXh0DQpgYGB7cn0NCmNvZGUNCmBgYA0KDQp0ZXh0DQpgYGB7cn0NCmNvZGUNCmBgYA0KDQp0ZXh0DQpgYGB7cn0NCmNvZGUNCmBgYA0KDQoNCg==</div>
+#Add the city
+malagaCal$city=&quot;malaga&quot;
+mallorcaCal$city=&quot;mallorca&quot;
+sevillaCal$city=&quot;sevilla&quot;
+
+#concatenate all the data
+calendars &lt;- rbind(malagaCal, mallorcaCal, sevillaCal)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="getting-listing" class="section level3">
+<h3>Getting Listing</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0dldCB0aGUgZGF0YVxubWFsYWdhTGlzdCA8LSByZWFkLmNzdihmaWxlID0gJ2RhdGEvbWFsYWdhL2xpc3RpbmdzLmNzdicpXG5tYWxsb3JjYUxpc3QgPC0gcmVhZC5jc3YoZmlsZSA9ICdkYXRhL21hbGxvcmNhL2xpc3RpbmdzLmNzdicpXG5zZXZpbGxhTGlzdCA8LSByZWFkLmNzdihmaWxlID0gJ2RhdGEvc2V2aWxsYS9saXN0aW5ncy5jc3YnKVxuXG4jQWRkIHRoZSBjaXR5XG5tYWxhZ2FMaXN0JGNpdHk9XCJtYWxhZ2FcIlxubWFsbG9yY2FMaXN0JGNpdHk9XCJtYWxsb3JjYVwiXG5zZXZpbGxhTGlzdCRjaXR5PVwic2V2aWxsYVwiXG5cbiNjb25jYXRlbmF0ZSBhbGwgdGhlIGRhdGFcbmxpc3RpbmdzIDwtIGRwbHlyOjpiaW5kX3Jvd3MobWFsYWdhTGlzdCwgbWFsbG9yY2FMaXN0LCBzZXZpbGxhTGlzdClcbmBgYCJ9 -->
+<pre class="r"><code>#Get the data
+malagaList &lt;- read.csv(file = &#39;data/malaga/listings.csv&#39;)
+mallorcaList &lt;- read.csv(file = &#39;data/mallorca/listings.csv&#39;)
+sevillaList &lt;- read.csv(file = &#39;data/sevilla/listings.csv&#39;)
+
+#Add the city
+malagaList$city=&quot;malaga&quot;
+mallorcaList$city=&quot;mallorca&quot;
+sevillaList$city=&quot;sevilla&quot;
+
+#concatenate all the data
+listings &lt;- dplyr::bind_rows(malagaList, mallorcaList, sevillaList)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Note: The mallorca dataframe doesnt have the same columns as the other sets, so the bind_rows function will put NA when there is no data</p>
+<hr />
+</div>
+<div id="declaring-a-function" class="section level3">
+<h3>Declaring a function</h3>
+<p>Will be useful to print pretty proportions</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucGVyY2VudCA8LSBmdW5jdGlvbih4LCBkaWdpdHMgPSAyLCBmb3JtYXQgPSBcImZcIiwgLi4uKSB7XG4gIHBhc3RlMChmb3JtYXRDKHggKiAxMDAsIGZvcm1hdCA9IGZvcm1hdCwgZGlnaXRzID0gZGlnaXRzLCAuLi4pLCBcIiAlXCIpXG59XG5gYGAifQ== -->
+<pre class="r"><code>percent &lt;- function(x, digits = 2, format = &quot;f&quot;, ...) {
+  paste0(formatC(x * 100, format = format, digits = digits, ...), &quot; %&quot;)
+}</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+</div>
+<div id="analysis-1" class="section level1">
+<h1>Analysis 1</h1>
+<div id="point-12" class="section level3">
+<h3>Point 1&amp;2</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI3ByZXByb2Nlc3MgdGhlIGF2YWlsYWJpbGl0eVxuY2FsZW5kYXJzJGF2YWlsYWJsZSA8LSBpZmVsc2UoY2FsZW5kYXJzJGF2YWlsYWJsZT09XCJ0XCIsIDEsIDApXG5cbiNDb21wdXRlIHRoZSBhdmFpbGFiaWxpdHkgb3ZlciAzMCBkYXlzXG5hdmdBdmFpbGFiaWxpdHkgPC0gYWdncmVnYXRlKGNhbGVuZGFycyRhdmFpbGFibGUsIGJ5PWxpc3QoQ2F0ZWdvcnk9Y2FsZW5kYXJzJGNpdHkpLCBGVU49bWVhbilcbm5hbWVzKGF2Z0F2YWlsYWJpbGl0eSkgPC0gYyhcImxpc3RpbmdfaWRcIixcImF2YWlsYWJpbGl0eVwiKVxuYXZnQXZhaWxhYmlsaXR5JGF2YWlsYWJpbGl0eSA8LSBhdmdBdmFpbGFiaWxpdHkkYXZhaWxhYmlsaXR5ICogMzBcblxuI1ByaW50aW5nXG5wcmludChhdmdBdmFpbGFiaWxpdHkpXG5gYGAifQ== -->
+<pre class="r"><code>#preprocess the availability
+calendars$available &lt;- ifelse(calendars$available==&quot;t&quot;, 1, 0)
+
+#Compute the availability over 30 days
+avgAvailability &lt;- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
+names(avgAvailability) &lt;- c(&quot;listing_id&quot;,&quot;availability&quot;)
+avgAvailability$availability &lt;- avgAvailability$availability * 30
+
+#Printing
+print(avgAvailability)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVFRVTdETUJEY09rMUxJOW9pOFFkdWpXaEw3a0h3QUFTWDN0Q1NoR0RoMmxYaUZMaHg1TWdENkEvNkJCN0FrWS93aGNJNnRTVmtYN3d6NjluWjhmWGxZaDR0SWdBSW9Bc01ncEJLNkYxY1RXZkpES0RMQ0hXb016RDNNNzA2cHNLUVIxWmlHcjBsQ2l6Um9nTkNRbFdady8yNldITWhrTXFSRWFYVFpQTngvdFdrODV1M3o1L3ZzL1JVanQ5UHRodlBMWlM0TEdycnhDd1pDVjVyTHN0Ym5sdm1FTmZJQmQ1eHdmV0xOMkpRcWFmWWpSbWFNYS9RbnNEM3lnVFd6c3VSVVk0YTQvdUs5SVIybnFTdlZwb3JTU0ptdmlUMHhKM0tJOGFOTkp2a2sreWhrWStUeEJpMDdmMFoyanI0VjdPOUpmdTFvMEwzM1lVc3VTemM3aFMrRUJhTUtIRWJPRjVWWEdxWGhOZzYxa3FqZXhkbFNqaW16UWE3UDhuL0tlSUtBZ0FBIn0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["listing_id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["availability"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"malaga","2":"17.20944"},{"1":"mallorca","2":"19.32631"},{"1":"sevilla","2":"16.42992"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-34" class="section level3">
+<h3>Point 3&amp;4</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0NsZWFuaW5nIHRoZSBwcmljZXNcbmNhbGVuZGFycyRhZGp1c3RlZF9wcmljZSA8LSBzdHJfcmVwbGFjZV9hbGwoY2FsZW5kYXJzJGFkanVzdGVkX3ByaWNlLFwiXFxcXCRcIixcIlwiKVxuY2FsZW5kYXJzJGFkanVzdGVkX3ByaWNlIDwtIHN0cl9yZXBsYWNlX2FsbChjYWxlbmRhcnMkYWRqdXN0ZWRfcHJpY2UsXCIsXCIsXCJcIilcbmNhbGVuZGFycyRhZGp1c3RlZF9wcmljZVtjYWxlbmRhcnMkYWRqdXN0ZWRfcHJpY2U9PVwiXCJdIDwtIDBcbmNhbGVuZGFycyRhZGp1c3RlZF9wcmljZSA8LSBhcy5udW1lcmljKGNhbGVuZGFycyRhZGp1c3RlZF9wcmljZSlcblxuI0NvbXB1dGluZyB0aGUgYXZlcmFnZSByZXZlbnVlIG92ZXIgMzAgZGF5c1xuY2FsZW5kYXJzJHJldmVudWUgPC0gKDEtY2FsZW5kYXJzJGF2YWlsYWJsZSkgKiBjYWxlbmRhcnMkYWRqdXN0ZWRfcHJpY2VcbmF2Z1JldmVudWUgPC0gYWdncmVnYXRlKGNhbGVuZGFycyRyZXZlbnVlLCBieT1saXN0KENhdGVnb3J5PWNhbGVuZGFycyRjaXR5KSwgRlVOPW1lYW4pXG5uYW1lcyhhdmdSZXZlbnVlKSA8LSBjKFwibGlzdGluZ19pZFwiLFwicmV2ZW51ZVwiKVxuXG4jUHJpbnRpbmdcbnByaW50KGF2Z1JldmVudWUpXG5gYGAifQ== -->
+<pre class="r"><code>#Cleaning the prices
+calendars$adjusted_price &lt;- str_replace_all(calendars$adjusted_price,&quot;\\$&quot;,&quot;&quot;)
+calendars$adjusted_price &lt;- str_replace_all(calendars$adjusted_price,&quot;,&quot;,&quot;&quot;)
+calendars$adjusted_price[calendars$adjusted_price==&quot;&quot;] &lt;- 0
+calendars$adjusted_price &lt;- as.numeric(calendars$adjusted_price)
+
+#Computing the average revenue over 30 days
+calendars$revenue &lt;- (1-calendars$available) * calendars$adjusted_price
+avgRevenue &lt;- aggregate(calendars$revenue, by=list(Category=calendars$city), FUN=mean)
+names(avgRevenue) &lt;- c(&quot;listing_id&quot;,&quot;revenue&quot;)
+
+#Printing
+print(avgRevenue)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVFRVTdETUJEY09rMUtJN1VnOWNvTGtCcEVLemhIZ2pOQ25IcW9CRzVpZ29WclY0NVRPUElJVG55Q0g2QWVPZkFOTG4xRVlaM2FFckl2bnBuMTdPejY5bW8yVFdjcEFFVFFCUUpSakJDU3k1dXp5ZmtFb0V1UWRiRFN0L2NMdmhvaHNPS1JzOWhDc3FTQ1Z0U3hBMlJDNmNMelhzM1dYQWlLY0doTitlTDZaUHIrOFpuUE45dlQrNS9qbkwxOXo3L0tKRWlMSlYyeTJpVVJKNmFDMTRiTDZvNlh2cnRtYXlZYkZyajdXajFudnNQQWRuaUY5a1JoVENGbzdXTzhtSmJVME94Qm94L1pMckQwMU1wd0pkRkU3Ry9FZ2JtakErR3drWGFTY2x3OE52SnBmR0VEMnZMK0RCeU8vbUd5anlTL3JsWHNmNXJKaWt2bVp4ZDB3WVFqUTl5NFhUaGJhUzZOM3dUVk9qUEtVUDh1TFpUd1Nyc2I3UDRBN0c0K0pBVUNBQUE9In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["listing_id"],"name":[1],"type":["chr"],"align":["left"]},{"label":["revenue"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"malaga","2":"146.4427"},{"1":"mallorca","2":"115.0143"},{"1":"sevilla","2":"172.6499"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-5" class="section level3">
+<h3>Point 5</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmVzIDwtIGFnZ3JlZ2F0ZShsaXN0aW5ncyRhdmFpbGFiaWxpdHlfMzAsIGJ5ID0gbGlzdChsaXN0aW5ncyRjaXR5KSwgRlVOPW1lYW4pXG5uYW1lcyhyZXMpIDwtIGMoXCJjaXR5XCIsXCJhdmdfbmV4dF8zMGRcIilcblxuI1ByaW50aW5nXG5wcmludChyZXMpXG5gYGAifQ== -->
+<pre class="r"><code>res &lt;- aggregate(listings$availability_30, by = list(listings$city), FUN=mean)
+names(res) &lt;- c(&quot;city&quot;,&quot;avg_next_30d&quot;)
+
+#Printing
+print(res)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVF1MDdETUJSMW5hU2hFUzFJbldEakF4clJsQW9KbGtqd0FRZ3hkS3N1aVFrUnJsMGw3b09OajJIblcxZ1FBeU1md05hdGNKM2FFcklYbjNPdXp6MzMrdlo2TW9vbUVTSEVJejZoeEFzUWt2YlZ6VEFaSjRUNEZGa0xLeDE5ci9GVkg0RVdENDFGRjlvejRGQ0FZWHZJdUt3eXk4T2FMVXZPQVdGUG05TGgzZEhINW5pY25wMTh2bjI5WHFiSnhmZjc2aWQwMGdJQk0xYWJKR3BFUHl2VnM4SDdzQ3ltZ3EzVmRIU2FPK1pPSlZleGJkRFZEVjVJY3p3M0plTlEyeFFyUmprb2lCOHE5Q1BiT3BaUXpsVXBCWnFvL296QU1iY3FSemhZQ0QxSlBzZ2VGK0pwY0s0RG12THVkQTMyL21HNmk2Uy9wbFZnUDVxSm9oVE16czdobm5GRGVyaHhzM0E4cjBxaDdDYW8xckdTQ3V5N0tKUGNLczF1WlBzSG11NmZYZ1FDQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["city"],"name":[1],"type":["chr"],"align":["left"]},{"label":["avg_next_30d"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"malaga","2":"17.32852"},{"1":"mallorca","2":"20.13221"},{"1":"sevilla","2":"18.23005"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-6" class="section level3">
+<h3>Point 6</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlzdGluZ3MkcHJpY2UgPC0gc3RyX3JlcGxhY2VfYWxsKGxpc3RpbmdzJHByaWNlLFwiXFxcXCRcIixcIlwiKVxubGlzdGluZ3MkcHJpY2UgPC0gc3RyX3JlcGxhY2VfYWxsKGxpc3RpbmdzJHByaWNlLFwiLFwiLFwiXCIpXG5saXN0aW5ncyRwcmljZVtsaXN0aW5ncyRwcmljZT09XCJcIl0gPC0gMFxubGlzdGluZ3MkcHJpY2UgPC0gYXMubnVtZXJpYyhsaXN0aW5ncyRwcmljZSlcblxubGlzdGluZ3MkcmV2ZW51ZV8zMCA8LSBsaXN0aW5ncyRhdmFpbGFiaWxpdHlfMzAgKiBsaXN0aW5ncyRwcmljZVxucmVzIDwtIGFnZ3JlZ2F0ZShsaXN0aW5ncyRyZXZlbnVlXzMwICwgYnkgPSBsaXN0KGxpc3RpbmdzJGNpdHkpLCBGVU49bWVhbilcbm5hbWVzKHJlcykgPC0gYyhcImNpdHlcIixcInJldmVudWVfbmV4dF8zMGRcIilcblxuI1ByaW50aW5nXG5wcmludChyZXMpXG5gYGAifQ== -->
+<pre class="r"><code>listings$price &lt;- str_replace_all(listings$price,&quot;\\$&quot;,&quot;&quot;)
+listings$price &lt;- str_replace_all(listings$price,&quot;,&quot;,&quot;&quot;)
+listings$price[listings$price==&quot;&quot;] &lt;- 0
+listings$price &lt;- as.numeric(listings$price)
+
+listings$revenue_30 &lt;- listings$availability_30 * listings$price
+res &lt;- aggregate(listings$revenue_30 , by = list(listings$city), FUN=mean)
+names(res) &lt;- c(&quot;city&quot;,&quot;revenue_next_30d&quot;)
+
+#Printing
+print(res)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJndHlpVERtaXVCaVlHQmdabUJoWUdKZ1pnVXlHZGljQXd5TlRJMFlHRmlZZ0R4R29Bd25pSzRBcWhJR01rQ0NBbEF0SUFtMjNNU2N4UFJFS0k4RHlNdkpMMHFHOGRtTFU4c3ljM0lTZ1V3K2tDYUhCVm43VkRSTzFUbHN0dXlady9Yb244TWFTN0d2NlZHcWFMYXg1aVhtcGhaRGJXS0NDcklrWjVaVVF0a0NSYWxscVhtbHFmRjVxUlVsOGNZR0tXZ0djQmJsbCt2QkRPRUZHZExBQUFiTTZEWWw1eVFXdzJ5Q0NYS2xKSllrNnFVVkFmVURlZi9RdExEbkY1Ums1dWNCTlRHQkFvUVZUVE5qRVpvQWYya2V5Q1VwdXNrWnBYblp1aFlnQzhEU0VNQUxaVE1qc1prZ1ZqTDloeHJGQ2d2czFMejB6THhVbU50ekVwTlNjNkFjUHFDUHdSN1dLeWpLekN1QitRUW9XcXhYa2wrU0NGUEhsWnlmQXhNQis0M2hId0Q4c0NFckNBSUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["city"],"name":[1],"type":["chr"],"align":["left"]},{"label":["revenue_next_30d"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"malaga","2":"2101.371"},{"1":"mallorca","2":"4921.549"},{"1":"sevilla","2":"3612.545"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-7" class="section level3">
+<h3>Point 7</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmV2ZW51ZV9ieV9iZWRyb29tX3NpemUgPC0gY2FzdChsaXN0aW5ncywgY2l0eSB+IGJlZHJvb21zLCBsZW5ndGgpXG5gYGAifQ== -->
+<pre class="r"><code>revenue_by_bedroom_size &lt;- cast(listings, city ~ bedrooms, length)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVXNpbmcgcmV2ZW51ZV8zMCBhcyB2YWx1ZSBjb2x1bW4uICBVc2UgdGhlIHZhbHVlIGFyZ3VtZW50IHRvIGNhc3QgdG8gb3ZlcnJpZGUgdGhpcyBjaG9pY2VcbiJ9 -->
+<pre><code>Using revenue_30 as value column.  Use the value argument to cast to override this choice</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ByaW50aW5nXG5wcmludChyZXZlbnVlX2J5X2JlZHJvb21fc2l6ZSlcbmBgYCJ9 -->
+<pre class="r"><code>#Printing
+print(revenue_by_bedroom_size)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6MjZ9LCJyZGYiOiJINHNJQUFBQUFBQUFCcTJVelU3Q1FCREhwMThnQ0dvQ0IrWGlFOUJBeTJmaXhlakZpekdjOExpV0NvMmxKYVg0a1hqZ2Rid1pYOENIOFNVOG9WTzZzNjBiRXk4MjJleHYvcDM1Nys1MDA5SDUyQzZQeXdDZ2dRNHFhQVlpRk02dTJsYlhBdEJWakJSOFUwcm1SOHlxSVRSd0hQQ1M1RVZoem53MlpUemF3Y2dQSTRmaTR0Szk5M3lmSVZhM1JaQ1lKbzl5a1dtNzF3Q1ZOWWJ2bVZZNFFlMERIVWFacGowRDFEL1I0eTNUbEFJaTZ2Q1NhZERIM2IvaWJPYTBZNnpEZGVBb3B4M2ltT0V3Y2hyNndRRFNqWkttNDZoc3U1RnBDcytGbktieW9VbDVkU2xQNFo2eW4vSkxIa2g1QUZrVDg1cGNDem45cjd6LzFJb28xZEk5L3JoQlJzRG03aExTMjlQZ291NTQ4Uk5kc1JaQm04QWlzQWs2QkYyQ0hrR2ZZRUF3NUtDMlc0TGFnaXhCdHFDT29LNmducUNCSU9Gc0NXZExPTnZDMlJiT0haRjNlU28xcGhTRkR5WTFKK21pdWs0N3Fza2RkSHkycEE2U1dKNndtSm0zRWRaanRKRktpdUVpOXNJQWk5VGtteGhTc1JKSnd2NHFTSFl5YVRxelZYRFhIQ1lMUUhZM3EzeldjdHhJbDFTL3VKVkJQd1kzbUhxQlMzdjMyWTNyODJBUFQ3dzlzTG1JdkNDbWs2QzZOT013WnBSWGRrS2ZsTzNaWVBNTlkyeVhYTFFFQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["city"],"name":[1],"type":["chr"],"align":["left"]},{"label":["0"],"name":[2],"type":["int"],"align":["right"]},{"label":["1"],"name":[3],"type":["int"],"align":["right"]},{"label":["2"],"name":[4],"type":["int"],"align":["right"]},{"label":["3"],"name":[5],"type":["int"],"align":["right"]},{"label":["4"],"name":[6],"type":["int"],"align":["right"]},{"label":["5"],"name":[7],"type":["int"],"align":["right"]},{"label":["6"],"name":[8],"type":["int"],"align":["right"]},{"label":["7"],"name":[9],"type":["int"],"align":["right"]},{"label":["8"],"name":[10],"type":["int"],"align":["right"]},{"label":["9"],"name":[11],"type":["int"],"align":["right"]},{"label":["10"],"name":[12],"type":["int"],"align":["right"]},{"label":["11"],"name":[13],"type":["int"],"align":["right"]},{"label":["12"],"name":[14],"type":["int"],"align":["right"]},{"label":["13"],"name":[15],"type":["int"],"align":["right"]},{"label":["14"],"name":[16],"type":["int"],"align":["right"]},{"label":["15"],"name":[17],"type":["int"],"align":["right"]},{"label":["16"],"name":[18],"type":["int"],"align":["right"]},{"label":["18"],"name":[19],"type":["int"],"align":["right"]},{"label":["19"],"name":[20],"type":["int"],"align":["right"]},{"label":["20"],"name":[21],"type":["int"],"align":["right"]},{"label":["21"],"name":[22],"type":["int"],"align":["right"]},{"label":["32"],"name":[23],"type":["int"],"align":["right"]},{"label":["33"],"name":[24],"type":["int"],"align":["right"]},{"label":["40"],"name":[25],"type":["int"],"align":["right"]},{"label":["NA"],"name":[26],"type":["int"],"align":["right"]}],"data":[{"1":"malaga","2":"512","3":"2905","4":"1596","5":"892","6":"262","7":"55","8":"31","9":"24","10":"6","11":"4","12":"1","13":"2","14":"1","15":"1","16":"1","17":"1","18":"0","19":"0","20":"0","21":"0","22":"0","23":"0","24":"0","25":"0","26":"7","_rn_":"1"},{"1":"mallorca","2":"0","3":"3200","4":"3299","5":"5368","6":"3452","7":"1200","8":"601","9":"104","10":"56","11":"12","12":"6","13":"2","14":"20","15":"4","16":"1","17":"0","18":"2","19":"1","20":"0","21":"1","22":"1","23":"1","24":"1","25":"1","26":"275","_rn_":"2"},{"1":"sevilla","2":"329","3":"3519","4":"1874","5":"690","6":"169","7":"46","8":"25","9":"5","10":"2","11":"1","12":"0","13":"3","14":"0","15":"1","16":"0","17":"1","18":"0","19":"0","20":"1","21":"0","22":"0","23":"0","24":"0","25":"0","26":"2","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[26]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-8" class="section level3">
+<h3>Point 8</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmV2ZW51ZV9ieV9yb29tdHlwZTwtIGNhc3QobGlzdGluZ3MsIGNpdHkgfiByb29tX3R5cGUsIGxlbmd0aClcbmBgYCJ9 -->
+<pre class="r"><code>revenue_by_roomtype&lt;- cast(listings, city ~ room_type, length)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVXNpbmcgcmV2ZW51ZV8zMCBhcyB2YWx1ZSBjb2x1bW4uICBVc2UgdGhlIHZhbHVlIGFyZ3VtZW50IHRvIGNhc3QgdG8gb3ZlcnJpZGUgdGhpcyBjaG9pY2VcbiJ9 -->
+<pre><code>Using revenue_30 as value column.  Use the value argument to cast to override this choice</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ByaW50aW5nXG5wcmludChyZXZlbnVlX2J5X3Jvb210eXBlKVxuYGBgIn0= -->
+<pre class="r"><code>#Printing
+print(revenue_by_roomtype)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6NX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVJ3VkxDUUF5TkxTMVNCUm4xQTdoNW9nb09SMC9xakVkR0wxeGpXV0hIN1M2elhWQnZqaGYvd2IvejRtZWcyYklMdFozSkpPOGwyYnlrOXplVHkyU1NBRUFJRFFnZ2pDaUUrSG84R0k2R0FJMkEwQjVsV3RhL1V0VUpCYmFtNjFwc0lzNVI0QXdkMmlja2xNNDhiaFpzeFlWQUN0dGxFNXgrQTF4OWtmL1ljWEJHOWtPbWQxejRTVytQYUY1Y3FldVFXUkhITlhXUnhKd1ZUbG5reUViR3padUxqMjZsNFpyMTVpcG41N2d3ams3dWxHR2lwNVhLSFhNNDFueUZobFc1ZzRjNWFqYmRVUDhIdDdSNlNmMXdxeko0aC9JTDZ3b3pnWVZYNk1sa2lnYlRKMDM5aE5hMWxxWmFHSzRrTlFYVncyLy9pSzRSM2FXMFNxYjliTDZVei8zQmhaMVE1amZXZGo2c3hORm1adkJidTEzTTVJeEw1c1VMZkdUQ2dRNnRYRzZjTGpTWDIwc1NXNlJHR2ZSMVNhYUVaOHJsWVAwSHRqK0lpM0VDQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["city"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Entire home/apt"],"name":[2],"type":["int"],"align":["right"]},{"label":["Hotel room"],"name":[3],"type":["int"],"align":["right"]},{"label":["Private room"],"name":[4],"type":["int"],"align":["right"]},{"label":["Shared room"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"malaga","2":"5345","3":"39","4":"903","5":"14","_rn_":"1"},{"1":"mallorca","2":"15770","3":"230","4":"1589","5":"19","_rn_":"2"},{"1":"sevilla","2":"5250","3":"114","4":"1286","5":"18","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+</div>
+<div id="analysis-2" class="section level1">
+<h1>Analysis 2</h1>
+<div id="point-1" class="section level3">
+<h3>Point 1</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0NvbXB1dGluZyB0aGUgcHJvcG9ydGlvblxucm9vbVR5cGVzIDwtIGFnZ3JlZ2F0ZShsaXN0aW5ncyRyb29tX3R5cGUsIGJ5PWxpc3QoQ2F0ZWdvcnk9bGlzdGluZ3Mkcm9vbV90eXBlKSwgRlVOPWxlbmd0aClcbm5hbWVzKHJvb21UeXBlcykgPC0gYyhcInJvb21fdHlwZVwiLFwicHJvcG9ydGlvblwiKVxucm9vbVR5cGVzJHByb3BvcnRpb24gPC0gcm9vbVR5cGVzJHByb3BvcnRpb24gLyBzdW0ocm9vbVR5cGVzJHByb3BvcnRpb24pICNjb21wdXRlIGEgJVxucm9vbVR5cGVzIDwtIGFycmFuZ2Uocm9vbVR5cGVzLCBkZXNjKHByb3BvcnRpb24pKSAjc29ydFxucm9vbVR5cGVzJHByb3BvcnRpb24gPC0gcGVyY2VudChyb29tVHlwZXMkcHJvcG9ydGlvbikgI2NvbnZlcnQgdG8gJVxuXG4jUHJpbnRpbmdcbnByaW50KHJvb21UeXBlcylcbmBgYCJ9 -->
+<pre class="r"><code>#Computing the proportion
+roomTypes &lt;- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
+names(roomTypes) &lt;- c(&quot;room_type&quot;,&quot;proportion&quot;)
+roomTypes$proportion &lt;- roomTypes$proportion / sum(roomTypes$proportion) #compute a %
+roomTypes &lt;- arrange(roomTypes, desc(proportion)) #sort
+roomTypes$proportion &lt;- percent(roomTypes$proportion) #convert to %
+
+#Printing
+print(roomTypes)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NCwibmNvbCI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVJ5MDdETUJCMDNhUlZEWVZLL0VBdUhHdHdxaGJ1Z01TeGdrdHZ5Q1NHUkNTMjViZzhibng1WVozWTBNYVNsWjNabloxZDUrRjJzeUFiZ2hBYW9naGhOSXdoUktPYk5VdVhLVUlSQmpTQXpNUjlQNkhxREFKSHp1QkdQbkY2SjIxcFJGS29XbHh3YlQxOXZEYmxPN2NpTVVyVm5pUDN5b3BxbnpsNkxMZ1JlVWNkOWgxZnIyaWFKdWNCc3BRdVZuOXd4R2k2L0VlWGxGMEJPaHc1bHJ3V2pXK0xQVGx4VmsvMlM0c3dsRFpLSzJOTEpYdDZLUDJnb2NmVTlmaEc3WW42UmxuRm0yQVVTSkp6eSttTEFUMmdYVTh5VnRvNWdnaTdSNDE3NG9IcEViT3RkSlBrODZ6WXlyYzVZODZoelhkbjZ1Tm9MOGFkSi83eHZlTHdXa0srbGpMc0gxZjhXVlFlbk1ESzdjWlVtMUtHZjBtQWJhaFZsb2M2a3FrcU1PMXlhUGNMZjBFTVZVMENBQUE9In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["room_type"],"name":[1],"type":["chr"],"align":["left"]},{"label":["proportion"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Entire home/apt","2":"86.22 %"},{"1":"Private room","2":"12.36 %"},{"1":"Hotel room","2":"1.25 %"},{"1":"Shared room","2":"0.17 %"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[4]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-2" class="section level3">
+<h3>Point 2</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0NvbXB1dGluZyB0aGUgcHJvcG9ydGlvblxuaG91c2VTaXplIDwtIGFnZ3JlZ2F0ZShsaXN0aW5ncyRiZWRyb29tcywgYnk9bGlzdChDYXRlZ29yeT1saXN0aW5ncyRiZWRyb29tcyksIEZVTj1sZW5ndGgpXG5uYW1lcyhob3VzZVNpemUpIDwtIGMoXCJiZWRyb29tc1wiLFwicHJvcG9ydGlvblwiKVxuaG91c2VTaXplJHByb3BvcnRpb24gPC0gaG91c2VTaXplJHByb3BvcnRpb24gLyBzdW0oaG91c2VTaXplJHByb3BvcnRpb24pICNjb21wdXRlIGEgJVxuaG91c2VTaXplIDwtIGFycmFuZ2UoaG91c2VTaXplLCBkZXNjKHByb3BvcnRpb24pKSAjc29ydFxuaG91c2VTaXplJHByb3BvcnRpb24gPC0gcGVyY2VudChob3VzZVNpemUkcHJvcG9ydGlvbikgI2NvbnZlcnQgdG8gJVxuXG4jUHJpbnRpbmdcbnByaW50KGhvdXNlU2l6ZSlcbmBgYCJ9 -->
+<pre class="r"><code>#Computing the proportion
+houseSize &lt;- aggregate(listings$bedrooms, by=list(Category=listings$bedrooms), FUN=length)
+names(houseSize) &lt;- c(&quot;bedrooms&quot;,&quot;proportion&quot;)
+houseSize$proportion &lt;- houseSize$proportion / sum(houseSize$proportion) #compute a %
+houseSize &lt;- arrange(houseSize, desc(proportion)) #sort
+houseSize$proportion &lt;- percent(houseSize$proportion) #convert to %
+
+#Printing
+print(houseSize)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MjQsIm5jb2wiOjJ9LCJyZGYiOiJINHNJQUFBQUFBQUFCcldTVFZQQ01CQ0dReWhmVlpBUm5la1JEODU0SWRPRVl1R3NQOER4eExXVXFvd2w2YVJsNU9ndlJ6ZHRZajlPWER5ODB6eWJ2THZaZEYrZjEzTjdiU09FMnNoQ0dMVTdzRVRkcHhmS0Znd2hDd08xWUdlZ3ZrYzROWUdGQ2c1QlRyNnByRVhNQXVWK2xRTFVBL1ZCbHlDVlFKVzUwTjRSNkFvMEJsMkRWTjRiMEMxb0Nyb0RQZWg5UjErZ042ZkU5NmYzQmhraks2K0c4MFdKbEpFbCs4T3VSOWlxSkViOFpaVm9tYmJyRXMrckVxTlZjbXNuM2NjYXNiT0puazN1UDFIOTUzWjRzSTlTL2VCWUIvdWJhQ3VGMktlYTdVU0tSTWhzSjNqRFBwRGlpNWdVNnYvaTcySU9uR2FkTUE1U1U4Y0U3VzJRQmVSTmdoL28xTEQwUktJcWdnbFA5SVJWelMzWkNJd1BYTjFrT3dzL0R2eHpScGtldlpZZXphRmVPNVUxTG1yaUg1MnJZeDRyNHU4N0hwbkx4OEVtaWpXTW9PVzhZNUxJSGM5TUt4Qk5TU2F5d0p5elF4R2JTTjRjT3YwQ0prc2tYWFlEQUFBPSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["bedrooms"],"name":[1],"type":["int"],"align":["right"]},{"label":["proportion"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"1","2":"31.77 %"},{"1":"3","2":"22.94 %"},{"1":"2","2":"22.35 %"},{"1":"4","2":"12.82 %"},{"1":"5","2":"4.29 %"},{"1":"0","2":"2.78 %"},{"1":"6","2":"2.17 %"},{"1":"7","2":"0.44 %"},{"1":"8","2":"0.21 %"},{"1":"12","2":"0.07 %"},{"1":"9","2":"0.06 %"},{"1":"10","2":"0.02 %"},{"1":"11","2":"0.02 %"},{"1":"13","2":"0.02 %"},{"1":"14","2":"0.01 %"},{"1":"15","2":"0.01 %"},{"1":"16","2":"0.01 %"},{"1":"18","2":"0.00 %"},{"1":"19","2":"0.00 %"},{"1":"20","2":"0.00 %"},{"1":"21","2":"0.00 %"},{"1":"32","2":"0.00 %"},{"1":"33","2":"0.00 %"},{"1":"40","2":"0.00 %"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[24]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-3" class="section level3">
+<h3>Point 3</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0NvbXB1dGluZyB0aGUgbmVpZ2hib3VyaG9vZCBwcm9wb3J0aW9uXG5uYmhQcm9wIDwtIGFnZ3JlZ2F0ZShsaXN0aW5ncyRuZWlnaGJvdXJob29kX2dyb3VwX2NsZWFuc2VkLCBieT1saXN0KENhdGVnb3J5PWxpc3RpbmdzJG5laWdoYm91cmhvb2RfZ3JvdXBfY2xlYW5zZWQpLCBGVU49bGVuZ3RoKVxubmFtZXMobmJoUHJvcCkgPC0gYyhcIm5laWdoYm91cmhvb2RfZ3JvdXBfY2xlYW5zZWRcIixcInByb3BvcnRpb25cIilcbm5iaFByb3AkcHJvcG9ydGlvbiA8LSBuYmhQcm9wJHByb3BvcnRpb24gLyBzdW0obmJoUHJvcCRwcm9wb3J0aW9uKSAjY29tcHV0ZSBhICVcbm5iaFByb3AgPC0gYXJyYW5nZShuYmhQcm9wLCBkZXNjKHByb3BvcnRpb24pKSAjc29ydFxubmJoUHJvcCRwcm9wb3J0aW9uIDwtIHBlcmNlbnQobmJoUHJvcCRwcm9wb3J0aW9uKSAjY29udmVydCB0byAlXG5cbiNQcmludGluZ1xuY2F0KFwiXFxuQW5hbHlzaXMgMiAtIFEzXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code>#Computing the neighbourhood proportion
+nbhProp &lt;- aggregate(listings$neighbourhood_group_cleansed, by=list(Category=listings$neighbourhood_group_cleansed), FUN=length)
+names(nbhProp) &lt;- c(&quot;neighbourhood_group_cleansed&quot;,&quot;proportion&quot;)
+nbhProp$proportion &lt;- nbhProp$proportion / sum(nbhProp$proportion) #compute a %
+nbhProp &lt;- arrange(nbhProp, desc(proportion)) #sort
+nbhProp$proportion &lt;- percent(nbhProp$proportion) #convert to %
+
+#Printing
+cat(&quot;\nAnalysis 2 - Q3\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5BbmFseXNpcyAyIC0gUTNcbiJ9 -->
+<pre><code>
+Analysis 2 - Q3</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQobmJoUHJvcClcbmBgYCJ9 -->
+<pre class="r"><code>print(nbhProp)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MTEsIm5jb2wiOjJ9LCJyZGYiOiJINHNJQUFBQUFBQUFCbDFTVDAvYk1CUTNLU21RcmxPbFRkcUJIWExac1ZhVEVGQ1AwTzB5TVZRQkIyN29OZkZhYTY0ZDJRbmJjZCtKajdEdkJUeTM5cHJHVXBUZkgvL2U4MHQ4Ky9VaGl4NGlRa2lQSEpLQTlFS0VwRCtiSjJtZUVuSVlJRHRBNThTKy8rQ3VEd2lzT01KbjRJemhERXloNGt0WjgyV2puTmkvMXh3a0lMTHMrSWJwSi83dldUcjMrQWNVb0JuNlcvN3BEbVE4aDRWUThUaEdYRVA4dlRHMXQzdDNqWGJ3M2JVeThTMWJzNUlyNDdTUGN4QnJwZ0d6VjB3SWVPSzc2SERHdExaVkw5ZFFNeWVlZmpNMXM1b29sTEd4ZTZVMVd3aVFoYytOL0FuUnZWRWFvL3RESDUxUDZYUVNmL0UwU1doeS9wLzJjNXFsTzViUk5OK3hsSjVsYlpic3l2UVRtcCsxV1phMzJhU1ZtOURweFI2ejN2NGZDeVdzbVhFSEQ1ejRXVEsrWEMxVW8xZEtsWTlMclpycXNSQU1wR0dsMnhOVldsVTRORmV5VS9KRXE5L1VseDNhc24vSlpnMjZ2UXNCeHZmMllsUkNEZlNueGp5eWwwN2tTRlcySTRZQ2U4M0NUdmhBZDRSUkkrMUp5bkd4YXVTdmNaTFpEaHQvdTRZT0QxbzQyUFlNWGwydDBIOUFKcGRjK3ZzUkNsZ3c0Y2g3SEhrek1hMDBsN1VmQlZWRGExV0QzeGNWU25obE14eDVlUVAzKy9DQVh3TUFBQT09In0= -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["neighbourhood_group_cleansed"],"name":[1],"type":["chr"],"align":["left"]},{"label":["proportion"],"name":[2],"type":["chr"],"align":["left"]}],"data":[{"1":"Casco Antiguo","2":"69.90 %"},{"1":"Triana","2":"11.16 %"},{"1":"NerviÃ³n","2":"5.32 %"},{"1":"Macarena","2":"3.25 %"},{"1":"San Pablo - Santa Justa","2":"2.43 %"},{"1":"Sur","2":"2.10 %"},{"1":"Los Remedios","2":"1.54 %"},{"1":"Palmera - Bellavista","2":"1.35 %"},{"1":"Cerro - Amate","2":"1.03 %"},{"1":"Este - Alcosa - Torreblanca","2":"0.97 %"},{"1":"Macarena - Norte","2":"0.93 %"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[11]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-4-cest-un-copier-coller-de-la-a1q7-cest-normal" class="section level3">
+<h3>Point 4 ??? c’est un copier coller de la A1Q7 c’est normal ?</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucmV2ZW51ZV9ieV9iZWRyb29tX3NpemUgPC0gY2FzdChsaXN0aW5ncywgY2l0eSB+IHJvb21fdHlwZSwgbGVuZ3RoKVxuYGBgIn0= -->
+<pre class="r"><code>revenue_by_bedroom_size &lt;- cast(listings, city ~ room_type, length)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiVXNpbmcgcmV2ZW51ZV8zMCBhcyB2YWx1ZSBjb2x1bW4uICBVc2UgdGhlIHZhbHVlIGFyZ3VtZW50IHRvIGNhc3QgdG8gb3ZlcnJpZGUgdGhpcyBjaG9pY2VcbiJ9 -->
+<pre><code>Using revenue_30 as value column.  Use the value argument to cast to override this choice</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI1ByaW50aW5nXG5wcmludChyZXZlbnVlX2J5X2JlZHJvb21fc2l6ZSlcbmBgYCJ9 -->
+<pre class="r"><code>#Printing
+print(revenue_by_bedroom_size)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6NX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVJ3VTdDUUJBZFcxcWtDaGoxQTdoNW9nWU1SMDlxNHBIb2hldFlWdGk0M1NYYkJmVm12UEFQL3AwWFB3T2RMYnRRMjJReTg5N003THlaUHR4T3JwSkpBZ0FoTkNDQU1LSVE0cHZ4WURnYUFqUUNRZ2VVYVZuL1JsVm5GTmlhRTlkaUUzR09BbWZvMENFaG9YVG1jYk5nS3k0RVV0Z3VtK0Q4RytENmkvem5ub01Mc2g4eXZlZkNOYjA5b25seHBhNURaa1djMXRSRkVuTldPR1dSSXhzWk4rOHU3dDVKd3pYcnpWWE9MbkZoSEozY0s4TkVUeXVWTytaNHJQa0tEYXR5UjQ5ejFHeTZwZjRQYm1uMW12cmhWbVh3QWVVWDFoVm1BZ3V2MEpQSkZBMm16NXI2Q1cxcUxVMjFNRnhKYWdxcWg5LzlFVjBqdWt0cGxVejcyWHdwWC9vRE82Qk1iNjN0ZkZpSm8rM0k0TGQydXBqSkdaZk1heGY0eElRREhkcTRYRGhkYUM1M2h5UzJTSTB5Nk91U1RBblBsTHZCNWc4c3dOL0pjQUlBQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["city"],"name":[1],"type":["chr"],"align":["left"]},{"label":["Entire home/apt"],"name":[2],"type":["int"],"align":["right"]},{"label":["Hotel room"],"name":[3],"type":["int"],"align":["right"]},{"label":["Private room"],"name":[4],"type":["int"],"align":["right"]},{"label":["Shared room"],"name":[5],"type":["int"],"align":["right"]}],"data":[{"1":"malaga","2":"5345","3":"39","4":"903","5":"14","_rn_":"1"},{"1":"mallorca","2":"15770","3":"230","4":"1589","5":"19","_rn_":"2"},{"1":"sevilla","2":"5250","3":"114","4":"1286","5":"18","_rn_":"3"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-5-1" class="section level3">
+<h3>Point 5</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2NvZGVcbmBgYCJ9 -->
+<pre class="r"><code>#code</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-6-1" class="section level3">
+<h3>Point 6</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2NvZGVcbmBgYCJ9 -->
+<pre class="r"><code>#code</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-7-1" class="section level3">
+<h3>Point 7</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2NvZGVcbmBgYCJ9 -->
+<pre class="r"><code>#code</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+</div>
+<div id="point-8-1" class="section level3">
+<h3>Point 8</h3>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI2NvZGVcbmBgYCJ9 -->
+<pre class="r"><code>#code</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQojIEltcG9ydGF0aW9uDQoqKioNCiMjIyBJbXBvcnRpbmcgbGlicmFyaWVzDQpgYGB7cn0NCmxpYnJhcnkoc3RyaW5ncikNCmxpYnJhcnkoZHBseXIpDQpsaWJyYXJ5KHJlc2hhcGUpDQpgYGANCg0KKioqDQojIyMgR2V0dGluZyBDYWxlbmRhcnMNCmBgYHtyfQ0KI0dldCB0aGUgZGF0YQ0KbWFsYWdhQ2FsIDwtIHJlYWQuY3N2KGZpbGUgPSAnZGF0YS9tYWxhZ2EvY2FsZW5kYXIuY3N2JykNCm1hbGxvcmNhQ2FsIDwtIHJlYWQuY3N2KGZpbGUgPSAnZGF0YS9tYWxsb3JjYS9jYWxlbmRhci5jc3YnKQ0Kc2V2aWxsYUNhbCA8LSByZWFkLmNzdihmaWxlID0gJ2RhdGEvc2V2aWxsYS9jYWxlbmRhci5jc3YnKQ0KDQojQWRkIHRoZSBjaXR5DQptYWxhZ2FDYWwkY2l0eT0ibWFsYWdhIg0KbWFsbG9yY2FDYWwkY2l0eT0ibWFsbG9yY2EiDQpzZXZpbGxhQ2FsJGNpdHk9InNldmlsbGEiDQoNCiNjb25jYXRlbmF0ZSBhbGwgdGhlIGRhdGENCmNhbGVuZGFycyA8LSByYmluZChtYWxhZ2FDYWwsIG1hbGxvcmNhQ2FsLCBzZXZpbGxhQ2FsKQ0KYGBgDQoNCioqKg0KIyMjIEdldHRpbmcgTGlzdGluZw0KYGBge3J9DQojR2V0IHRoZSBkYXRhDQptYWxhZ2FMaXN0IDwtIHJlYWQuY3N2KGZpbGUgPSAnZGF0YS9tYWxhZ2EvbGlzdGluZ3MuY3N2JykNCm1hbGxvcmNhTGlzdCA8LSByZWFkLmNzdihmaWxlID0gJ2RhdGEvbWFsbG9yY2EvbGlzdGluZ3MuY3N2JykNCnNldmlsbGFMaXN0IDwtIHJlYWQuY3N2KGZpbGUgPSAnZGF0YS9zZXZpbGxhL2xpc3RpbmdzLmNzdicpDQoNCiNBZGQgdGhlIGNpdHkNCm1hbGFnYUxpc3QkY2l0eT0ibWFsYWdhIg0KbWFsbG9yY2FMaXN0JGNpdHk9Im1hbGxvcmNhIg0Kc2V2aWxsYUxpc3QkY2l0eT0ic2V2aWxsYSINCg0KI2NvbmNhdGVuYXRlIGFsbCB0aGUgZGF0YQ0KbGlzdGluZ3MgPC0gZHBseXI6OmJpbmRfcm93cyhtYWxhZ2FMaXN0LCBtYWxsb3JjYUxpc3QsIHNldmlsbGFMaXN0KQ0KYGBgDQpOb3RlOiBUaGUgbWFsbG9yY2EgZGF0YWZyYW1lIGRvZXNudCBoYXZlIHRoZSBzYW1lIGNvbHVtbnMgYXMgdGhlIG90aGVyIHNldHMsIHNvIHRoZSBiaW5kX3Jvd3MgZnVuY3Rpb24gd2lsbCBwdXQgTkEgd2hlbiB0aGVyZSBpcyBubyBkYXRhDQoNCioqKg0KIyMjIERlY2xhcmluZyBhIGZ1bmN0aW9uDQpXaWxsIGJlIHVzZWZ1bCB0byBwcmludCBwcmV0dHkgcHJvcG9ydGlvbnMNCmBgYHtyfQ0KcGVyY2VudCA8LSBmdW5jdGlvbih4LCBkaWdpdHMgPSAyLCBmb3JtYXQgPSAiZiIsIC4uLikgew0KICBwYXN0ZTAoZm9ybWF0Qyh4ICogMTAwLCBmb3JtYXQgPSBmb3JtYXQsIGRpZ2l0cyA9IGRpZ2l0cywgLi4uKSwgIiAlIikNCn0NCmBgYA0KDQoqKioNCiMgQW5hbHlzaXMgMQ0KIyMjIFBvaW50IDEmMg0KYGBge3J9DQojcHJlcHJvY2VzcyB0aGUgYXZhaWxhYmlsaXR5DQpjYWxlbmRhcnMkYXZhaWxhYmxlIDwtIGlmZWxzZShjYWxlbmRhcnMkYXZhaWxhYmxlPT0idCIsIDEsIDApDQoNCiNDb21wdXRlIHRoZSBhdmFpbGFiaWxpdHkgb3ZlciAzMCBkYXlzDQphdmdBdmFpbGFiaWxpdHkgPC0gYWdncmVnYXRlKGNhbGVuZGFycyRhdmFpbGFibGUsIGJ5PWxpc3QoQ2F0ZWdvcnk9Y2FsZW5kYXJzJGNpdHkpLCBGVU49bWVhbikNCm5hbWVzKGF2Z0F2YWlsYWJpbGl0eSkgPC0gYygibGlzdGluZ19pZCIsImF2YWlsYWJpbGl0eSIpDQphdmdBdmFpbGFiaWxpdHkkYXZhaWxhYmlsaXR5IDwtIGF2Z0F2YWlsYWJpbGl0eSRhdmFpbGFiaWxpdHkgKiAzMA0KDQojUHJpbnRpbmcNCnByaW50KGF2Z0F2YWlsYWJpbGl0eSkNCmBgYA0KDQoqKioNCiMjIyBQb2ludCAzJjQNCmBgYHtyfQ0KI0NsZWFuaW5nIHRoZSBwcmljZXMNCmNhbGVuZGFycyRhZGp1c3RlZF9wcmljZSA8LSBzdHJfcmVwbGFjZV9hbGwoY2FsZW5kYXJzJGFkanVzdGVkX3ByaWNlLCJcXCQiLCIiKQ0KY2FsZW5kYXJzJGFkanVzdGVkX3ByaWNlIDwtIHN0cl9yZXBsYWNlX2FsbChjYWxlbmRhcnMkYWRqdXN0ZWRfcHJpY2UsIiwiLCIiKQ0KY2FsZW5kYXJzJGFkanVzdGVkX3ByaWNlW2NhbGVuZGFycyRhZGp1c3RlZF9wcmljZT09IiJdIDwtIDANCmNhbGVuZGFycyRhZGp1c3RlZF9wcmljZSA8LSBhcy5udW1lcmljKGNhbGVuZGFycyRhZGp1c3RlZF9wcmljZSkNCg0KI0NvbXB1dGluZyB0aGUgYXZlcmFnZSByZXZlbnVlIG92ZXIgMzAgZGF5cw0KY2FsZW5kYXJzJHJldmVudWUgPC0gKDEtY2FsZW5kYXJzJGF2YWlsYWJsZSkgKiBjYWxlbmRhcnMkYWRqdXN0ZWRfcHJpY2UNCmF2Z1JldmVudWUgPC0gYWdncmVnYXRlKGNhbGVuZGFycyRyZXZlbnVlLCBieT1saXN0KENhdGVnb3J5PWNhbGVuZGFycyRjaXR5KSwgRlVOPW1lYW4pDQpuYW1lcyhhdmdSZXZlbnVlKSA8LSBjKCJsaXN0aW5nX2lkIiwicmV2ZW51ZSIpDQoNCiNQcmludGluZw0KcHJpbnQoYXZnUmV2ZW51ZSkNCmBgYA0KDQoqKioNCiMjIyBQb2ludCA1DQpgYGB7cn0NCnJlcyA8LSBhZ2dyZWdhdGUobGlzdGluZ3MkYXZhaWxhYmlsaXR5XzMwLCBieSA9IGxpc3QobGlzdGluZ3MkY2l0eSksIEZVTj1tZWFuKQ0KbmFtZXMocmVzKSA8LSBjKCJjaXR5IiwiYXZnX25leHRfMzBkIikNCg0KI1ByaW50aW5nDQpwcmludChyZXMpDQpgYGANCg0KKioqDQojIyMgUG9pbnQgNg0KYGBge3J9DQpsaXN0aW5ncyRwcmljZSA8LSBzdHJfcmVwbGFjZV9hbGwobGlzdGluZ3MkcHJpY2UsIlxcJCIsIiIpDQpsaXN0aW5ncyRwcmljZSA8LSBzdHJfcmVwbGFjZV9hbGwobGlzdGluZ3MkcHJpY2UsIiwiLCIiKQ0KbGlzdGluZ3MkcHJpY2VbbGlzdGluZ3MkcHJpY2U9PSIiXSA8LSAwDQpsaXN0aW5ncyRwcmljZSA8LSBhcy5udW1lcmljKGxpc3RpbmdzJHByaWNlKQ0KDQpsaXN0aW5ncyRyZXZlbnVlXzMwIDwtIGxpc3RpbmdzJGF2YWlsYWJpbGl0eV8zMCAqIGxpc3RpbmdzJHByaWNlDQpyZXMgPC0gYWdncmVnYXRlKGxpc3RpbmdzJHJldmVudWVfMzAgLCBieSA9IGxpc3QobGlzdGluZ3MkY2l0eSksIEZVTj1tZWFuKQ0KbmFtZXMocmVzKSA8LSBjKCJjaXR5IiwicmV2ZW51ZV9uZXh0XzMwZCIpDQoNCiNQcmludGluZw0KcHJpbnQocmVzKQ0KYGBgDQoNCioqKg0KIyMjIFBvaW50IDcNCmBgYHtyfQ0KcmV2ZW51ZV9ieV9iZWRyb29tX3NpemUgPC0gY2FzdChsaXN0aW5ncywgY2l0eSB+IGJlZHJvb21zLCBsZW5ndGgpDQoNCiNQcmludGluZw0KcHJpbnQocmV2ZW51ZV9ieV9iZWRyb29tX3NpemUpDQpgYGANCg0KKioqDQojIyMgUG9pbnQgOA0KYGBge3J9DQpyZXZlbnVlX2J5X3Jvb210eXBlPC0gY2FzdChsaXN0aW5ncywgY2l0eSB+IHJvb21fdHlwZSwgbGVuZ3RoKQ0KDQojUHJpbnRpbmcNCnByaW50KHJldmVudWVfYnlfcm9vbXR5cGUpDQpgYGANCg0KDQoNCg0KKioqDQojIEFuYWx5c2lzIDINCiMjIyBQb2ludCAxDQpgYGB7cn0NCiNDb21wdXRpbmcgdGhlIHByb3BvcnRpb24NCnJvb21UeXBlcyA8LSBhZ2dyZWdhdGUobGlzdGluZ3Mkcm9vbV90eXBlLCBieT1saXN0KENhdGVnb3J5PWxpc3RpbmdzJHJvb21fdHlwZSksIEZVTj1sZW5ndGgpDQpuYW1lcyhyb29tVHlwZXMpIDwtIGMoInJvb21fdHlwZSIsInByb3BvcnRpb24iKQ0Kcm9vbVR5cGVzJHByb3BvcnRpb24gPC0gcm9vbVR5cGVzJHByb3BvcnRpb24gLyBzdW0ocm9vbVR5cGVzJHByb3BvcnRpb24pICNjb21wdXRlIGEgJQ0Kcm9vbVR5cGVzIDwtIGFycmFuZ2Uocm9vbVR5cGVzLCBkZXNjKHByb3BvcnRpb24pKSAjc29ydA0Kcm9vbVR5cGVzJHByb3BvcnRpb24gPC0gcGVyY2VudChyb29tVHlwZXMkcHJvcG9ydGlvbikgI2NvbnZlcnQgdG8gJQ0KDQojUHJpbnRpbmcNCnByaW50KHJvb21UeXBlcykNCmBgYA0KDQoqKioNCiMjIyBQb2ludCAyDQpgYGB7cn0NCiNDb21wdXRpbmcgdGhlIHByb3BvcnRpb24NCmhvdXNlU2l6ZSA8LSBhZ2dyZWdhdGUobGlzdGluZ3MkYmVkcm9vbXMsIGJ5PWxpc3QoQ2F0ZWdvcnk9bGlzdGluZ3MkYmVkcm9vbXMpLCBGVU49bGVuZ3RoKQ0KbmFtZXMoaG91c2VTaXplKSA8LSBjKCJiZWRyb29tcyIsInByb3BvcnRpb24iKQ0KaG91c2VTaXplJHByb3BvcnRpb24gPC0gaG91c2VTaXplJHByb3BvcnRpb24gLyBzdW0oaG91c2VTaXplJHByb3BvcnRpb24pICNjb21wdXRlIGEgJQ0KaG91c2VTaXplIDwtIGFycmFuZ2UoaG91c2VTaXplLCBkZXNjKHByb3BvcnRpb24pKSAjc29ydA0KaG91c2VTaXplJHByb3BvcnRpb24gPC0gcGVyY2VudChob3VzZVNpemUkcHJvcG9ydGlvbikgI2NvbnZlcnQgdG8gJQ0KDQojUHJpbnRpbmcNCnByaW50KGhvdXNlU2l6ZSkNCmBgYA0KDQoqKioNCiMjIyBQb2ludCAzDQpgYGB7cn0NCiNDb21wdXRpbmcgdGhlIG5laWdoYm91cmhvb2QgcHJvcG9ydGlvbg0KbmJoUHJvcCA8LSBhZ2dyZWdhdGUobGlzdGluZ3MkbmVpZ2hib3VyaG9vZF9ncm91cF9jbGVhbnNlZCwgYnk9bGlzdChDYXRlZ29yeT1saXN0aW5ncyRuZWlnaGJvdXJob29kX2dyb3VwX2NsZWFuc2VkKSwgRlVOPWxlbmd0aCkNCm5hbWVzKG5iaFByb3ApIDwtIGMoIm5laWdoYm91cmhvb2RfZ3JvdXBfY2xlYW5zZWQiLCJwcm9wb3J0aW9uIikNCm5iaFByb3AkcHJvcG9ydGlvbiA8LSBuYmhQcm9wJHByb3BvcnRpb24gLyBzdW0obmJoUHJvcCRwcm9wb3J0aW9uKSAjY29tcHV0ZSBhICUNCm5iaFByb3AgPC0gYXJyYW5nZShuYmhQcm9wLCBkZXNjKHByb3BvcnRpb24pKSAjc29ydA0KbmJoUHJvcCRwcm9wb3J0aW9uIDwtIHBlcmNlbnQobmJoUHJvcCRwcm9wb3J0aW9uKSAjY29udmVydCB0byAlDQoNCiNQcmludGluZw0KY2F0KCJcbkFuYWx5c2lzIDIgLSBRM1xuIikNCnByaW50KG5iaFByb3ApDQpgYGANCg0KKioqDQojIyMgUG9pbnQgNCA/Pz8gYydlc3QgdW4gY29waWVyIGNvbGxlciBkZSBsYSBBMVE3IGMnZXN0IG5vcm1hbCA/DQpgYGB7cn0NCnJldmVudWVfYnlfYmVkcm9vbV9zaXplIDwtIGNhc3QobGlzdGluZ3MsIGNpdHkgfiByb29tX3R5cGUsIGxlbmd0aCkNCg0KI1ByaW50aW5nDQpwcmludChyZXZlbnVlX2J5X2JlZHJvb21fc2l6ZSkNCmBgYA0KDQoqKioNCiMjIyBQb2ludCA1DQpgYGB7cn0NCiNjb2RlDQpgYGANCg0KKioqDQojIyMgUG9pbnQgNg0KYGBge3J9DQojY29kZQ0KYGBgDQoNCioqKg0KIyMjIFBvaW50IDcNCmBgYHtyfQ0KI2NvZGUNCmBgYA0KDQoqKioNCiMjIyBQb2ludCA4DQpgYGB7cn0NCiNjb2RlDQpgYGA=</div>
 
 
 

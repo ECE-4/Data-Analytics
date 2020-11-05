@@ -3,34 +3,213 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-text
+# Importation
+***
+### Importing libraries
 ```{r}
-code
+library(stringr)
+library(dplyr)
+library(reshape)
 ```
 
-text
+***
+### Getting Calendars
 ```{r}
-code
+#Get the data
+malagaCal <- read.csv(file = 'data/malaga/calendar.csv')
+mallorcaCal <- read.csv(file = 'data/mallorca/calendar.csv')
+sevillaCal <- read.csv(file = 'data/sevilla/calendar.csv')
+
+#Add the city
+malagaCal$city="malaga"
+mallorcaCal$city="mallorca"
+sevillaCal$city="sevilla"
+
+#concatenate all the data
+calendars <- rbind(malagaCal, mallorcaCal, sevillaCal)
 ```
 
-text
+***
+### Getting Listing
 ```{r}
-code
+#Get the data
+malagaList <- read.csv(file = 'data/malaga/listings.csv')
+mallorcaList <- read.csv(file = 'data/mallorca/listings.csv')
+sevillaList <- read.csv(file = 'data/sevilla/listings.csv')
+
+#Add the city
+malagaList$city="malaga"
+mallorcaList$city="mallorca"
+sevillaList$city="sevilla"
+
+#concatenate all the data
+listings <- dplyr::bind_rows(malagaList, mallorcaList, sevillaList)
+```
+Note: The mallorca dataframe doesnt have the same columns as the other sets, so the bind_rows function will put NA when there is no data
+
+***
+### Declaring a function
+Will be useful to print pretty proportions
+```{r}
+percent <- function(x, digits = 2, format = "f", ...) {
+  paste0(formatC(x * 100, format = format, digits = digits, ...), " %")
+}
 ```
 
-text
+***
+# Analysis 1
+### Point 1&2
 ```{r}
-code
+#preprocess the availability
+calendars$available <- ifelse(calendars$available=="t", 1, 0)
+
+#Compute the availability over 30 days
+avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
+names(avgAvailability) <- c("listing_id","availability")
+avgAvailability$availability <- avgAvailability$availability * 30
+
+#Printing
+print(avgAvailability)
 ```
 
-text
+***
+### Point 3&4
 ```{r}
-code
+#Cleaning the prices
+calendars$adjusted_price <- str_replace_all(calendars$adjusted_price,"\\$","")
+calendars$adjusted_price <- str_replace_all(calendars$adjusted_price,",","")
+calendars$adjusted_price[calendars$adjusted_price==""] <- 0
+calendars$adjusted_price <- as.numeric(calendars$adjusted_price)
+
+#Computing the average revenue over 30 days
+calendars$revenue <- (1-calendars$available) * calendars$adjusted_price
+avgRevenue <- aggregate(calendars$revenue, by=list(Category=calendars$city), FUN=mean)
+names(avgRevenue) <- c("listing_id","revenue")
+
+#Printing
+print(avgRevenue)
 ```
 
-text
+***
+### Point 5
 ```{r}
-code
+res <- aggregate(listings$availability_30, by = list(listings$city), FUN=mean)
+names(res) <- c("city","avg_next_30d")
+
+#Printing
+print(res)
+```
+
+***
+### Point 6
+```{r}
+listings$price <- str_replace_all(listings$price,"\\$","")
+listings$price <- str_replace_all(listings$price,",","")
+listings$price[listings$price==""] <- 0
+listings$price <- as.numeric(listings$price)
+
+listings$revenue_30 <- listings$availability_30 * listings$price
+res <- aggregate(listings$revenue_30 , by = list(listings$city), FUN=mean)
+names(res) <- c("city","revenue_next_30d")
+
+#Printing
+print(res)
+```
+
+***
+### Point 7
+```{r}
+revenue_by_bedroom_size <- cast(listings, city ~ bedrooms, length)
+
+#Printing
+print(revenue_by_bedroom_size)
+```
+
+***
+### Point 8
+```{r}
+revenue_by_roomtype<- cast(listings, city ~ room_type, length)
+
+#Printing
+print(revenue_by_roomtype)
 ```
 
 
+
+
+***
+# Analysis 2
+### Point 1
+```{r}
+#Computing the proportion
+roomTypes <- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
+names(roomTypes) <- c("room_type","proportion")
+roomTypes$proportion <- roomTypes$proportion / sum(roomTypes$proportion) #compute a %
+roomTypes <- arrange(roomTypes, desc(proportion)) #sort
+roomTypes$proportion <- percent(roomTypes$proportion) #convert to %
+
+#Printing
+print(roomTypes)
+```
+
+***
+### Point 2
+```{r}
+#Computing the proportion
+houseSize <- aggregate(listings$bedrooms, by=list(Category=listings$bedrooms), FUN=length)
+names(houseSize) <- c("bedrooms","proportion")
+houseSize$proportion <- houseSize$proportion / sum(houseSize$proportion) #compute a %
+houseSize <- arrange(houseSize, desc(proportion)) #sort
+houseSize$proportion <- percent(houseSize$proportion) #convert to %
+
+#Printing
+print(houseSize)
+```
+
+***
+### Point 3
+```{r}
+#Computing the neighbourhood proportion
+nbhProp <- aggregate(listings$neighbourhood_group_cleansed, by=list(Category=listings$neighbourhood_group_cleansed), FUN=length)
+names(nbhProp) <- c("neighbourhood_group_cleansed","proportion")
+nbhProp$proportion <- nbhProp$proportion / sum(nbhProp$proportion) #compute a %
+nbhProp <- arrange(nbhProp, desc(proportion)) #sort
+nbhProp$proportion <- percent(nbhProp$proportion) #convert to %
+
+#Printing
+cat("\nAnalysis 2 - Q3\n")
+print(nbhProp)
+```
+
+***
+### Point 4 ??? c'est un copier coller de la A1Q7 c'est normal ?
+```{r}
+revenue_by_bedroom_size <- cast(listings, city ~ room_type, length)
+
+#Printing
+print(revenue_by_bedroom_size)
+```
+
+***
+### Point 5
+```{r}
+#code
+```
+
+***
+### Point 6
+```{r}
+#code
+```
+
+***
+### Point 7
+```{r}
+#code
+```
+
+***
+### Point 8
+```{r}
+#code
+```

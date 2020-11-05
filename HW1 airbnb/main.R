@@ -145,7 +145,7 @@ print(revenue_by_roomtype)
 roomTypes <- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
 names(roomTypes) <- c("room_type","proportion")
 roomTypes$proportion <- roomTypes$proportion / sum(roomTypes$proportion) #compute a %
-roomTypes <- arrange(nbhProp, desc(proportion)) #sort
+roomTypes <- arrange(roomTypes, desc(proportion)) #sort
 roomTypes$proportion <- percent(roomTypes$proportion) #convert to %
 
 #Printing
@@ -161,7 +161,7 @@ print(roomTypes)
 houseSize <- aggregate(listings$bedrooms, by=list(Category=listings$bedrooms), FUN=length)
 names(houseSize) <- c("bedrooms","proportion")
 houseSize$proportion <- houseSize$proportion / sum(houseSize$proportion) #compute a %
-houseSize <- arrange(nbhProp, desc(proportion)) #sort
+houseSize <- arrange(houseSize, desc(proportion)) #sort
 houseSize$proportion <- percent(houseSize$proportion) #convert to %
 
 #Printing
