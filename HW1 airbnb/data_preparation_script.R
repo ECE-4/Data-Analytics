@@ -3,17 +3,17 @@ library(stringr)
 library(ggplot2)
 library(data.table)
 
-setwd("~/Dropbox/Data Analytics ECE/Airbnb")
+setwd("~/Documents/Data-Analytics/HW1 airbnb/")
 
-# a generic function to prepare data for a specific city, data_date
-prepare_data <- function(city, data_date)
+# a generic function to prepare data for a specific city
+prepare_data <- function(city)
 {
     # Cleaning listings dataframe
     
-    # suppose raw data is stored in data_raw/city/data_date/listings.csv.gz
-    listings_url <- file.path("data_raw", city, data_date, "listings.csv.gz")
+    # suppose raw data is stored in data_raw/city/listings.csv.gz
+    listings_url <- file.path("data", city, "listings.csv")
     # suppose raw data is stored in data_raw/city/data_date/calendar.csv.gz
-    calendar_url <- file.path("data_raw", city, data_date, "calendar.csv.gz")
+    calendar_url <- file.path("data", city, "calendar.csv")
     
     print(paste0("reading data from ", listings_url))
     listings <- read.csv(gzfile(listings_url))
@@ -22,11 +22,10 @@ prepare_data <- function(city, data_date)
     
     ## Add Keys: columns city and day date
     listings$city <- city
-    listings$data_date <- data_date
     
     ## Select interesting columns
     ### Most columns don't contain interesting information
-    columns_listings <- c("city", "data_date", "id", "neighbourhood_cleansed", 
+    columns_listings <- c("city", "id", "neighbourhood_cleansed", 
                           "latitude", "longitude", 
                           "property_type", "room_type", "accommodates", "bedrooms", 
                           "beds", "price", "minimum_nights",  "maximum_nights")
@@ -34,7 +33,6 @@ prepare_data <- function(city, data_date)
     listings <- listings %>% 
         select(columns_listings) %>% 
         arrange(id)
-    
     
     # Cleaning calendar dataframe
     
@@ -86,32 +84,28 @@ prepare_data <- function(city, data_date)
     
     listings_cleansed <- listings %>% left_join(calendar, by = c("id" = "listing_id"))
     
-    dir.create(file.path("data_cleansed", city, data_date), recursive = TRUE)
+    dir.create(file.path("data_cleansed", city), recursive = TRUE)
     
-    write.csv(listings_cleansed, file.path("data_cleansed", city, data_date, "listings.csv"))
-    print(paste0("saving data into ", file.path("data_cleansed", city, data_date, "listings.csv")))
+    write.csv(listings_cleansed, file.path("data_cleansed", city, "listings.csv"))
+    print(paste0("saving data into ", file.path("data_cleansed", city, "listings.csv")))
     
 }  
 
 # Example: Reading data for malaga:
 # Preparing data 
 
-city <- "malaga"
-data_date <- "2020-06-30"
-prepare_data(city, data_date)
-
+# city <- "malaga"
+# prepare_data(city)
 
 # Example: Prepare data for multiple cities
 
 cities <- c("malaga", "mallorca", "sevilla")
-data_dates <- c("2020-06-30", "2020-09-19", "2020-06-29")
 
 for(i in 1:length(cities)){
     city <- cities[i]
-    data_date <- data_dates[i]
     print("-------------------------------------------------")
-    print(paste(c("Preparing data for", city, "compiled at", data_date), collapse = " "))
-    prepare_data(city, data_date)
+    print(paste(c("Preparing data for", city), collapse = " "))
+    prepare_data(city)
 }
 
 # Clean Environment
@@ -122,11 +116,6 @@ rm(list=ls())
 
 # Reading cleansed data
 cities <- c("malaga", "mallorca", "sevilla")
-data_dates <- c("2020-06-30", "2020-09-19", "2020-06-29")
-
-# We are only interested in data between min_date and max_date
-min_date <- '2020-05-01'
-max_date <- '2020-11-01'
 
 files_paths <- c()
 
@@ -143,15 +132,33 @@ for(city in cities){
     files_paths <- c(files_paths, file_subdirs)
 }
 files_paths <- file.path(files_paths, "listings.csv")
-listings <- 
-    do.call(rbind,
-            lapply(files_paths, read.csv, row.names=1))
 
+#listings <- 
+#    do.call(rbind,
+#            lapply(files_paths, read.csv))
+
+malaga <- read_csv(file="data_cleansed/malaga/listings.csv")
+mallorca <- read_csv(file="data_cleansed/mallorca/listings.csv")
+sevilla <- read_csv(file="data_cleansed/sevilla/listings.csv")
+
+listings <- rbind(malaga, mallorca, sevilla)
+    
 ## Preprocess
 listings$bedrooms <- ifelse(listings$bedrooms >= 5, "5+", listings$bedrooms)
 
-
 # Analysis 1
+## Find the average availability over 30 days of listings per each city
+
+#Compute the availability over 30 days
+avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
+names(avgAvailability) <- c("listing_id","availability")
+avgAvailability$availability <- avgAvailability$availability * 30
+
+#Printing
+cat("\nAnalysis 1 - Q1&2\n")
+print(avgAvailability)
+
+# Analysis 5
 ## Comparing the distribution of estimated revenue for the next 30 days of listings
 ## per each city.
 p <- ggplot(listings, aes(city, revenue_30))
@@ -160,4 +167,5 @@ p + geom_boxplot(aes(colour = "red"), outlier.shape = NA) +
 
 # for this I chose to plot a boxplot to show the distribution
 # I could've used other types of plots! Be creative!
+
 

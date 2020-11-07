@@ -45,8 +45,6 @@ percent <- function(x, digits = 2, format = "f", ...) {
   paste0(formatC(x * 100, format = format, digits = digits, ...), " %")
 }
 
-
-
 #####################
 ##### Analysis 1 ####
 ##### Point 1&2 #####
