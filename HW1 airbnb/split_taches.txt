@@ -1,18 +1,18 @@
 Analyse 1
-Fait
+(fait)
 -
-Neil (fait)
+(fait)
 -
-Sebastien (fait)
-Sebastien (fait)
-Alexis (fait) 
-Olivia (fait)
+(fait)
+(fait)
+(fait) 
+(fait)
 
 Analyse 2
-Neil (fait)
-Neil (fait)
-Neil (fait)
-Alexis
-Alexis
+(fait)
+(fait)
+(fait)
+(fait)
+Olivia
 Olivia
 Olivia

@@ -137,35 +137,88 @@ files_paths <- file.path(files_paths, "listings.csv")
 #    do.call(rbind,
 #            lapply(files_paths, read.csv))
 
-malaga <- read_csv(file="data_cleansed/malaga/listings.csv")
-mallorca <- read_csv(file="data_cleansed/mallorca/listings.csv")
-sevilla <- read_csv(file="data_cleansed/sevilla/listings.csv")
+malaga <- read.csv(file="data_cleansed/malaga/listings.csv")
+mallorca <- read.csv(file="data_cleansed/mallorca/listings.csv")
+sevilla <- read.csv(file="data_cleansed/sevilla/listings.csv")
 
 listings <- rbind(malaga, mallorca, sevilla)
     
 ## Preprocess
 listings$bedrooms <- ifelse(listings$bedrooms >= 5, "5+", listings$bedrooms)
 
+
+################
+
+## Analysis 1 ##
+
+#Q1
+first <- ggplot(listings, aes(x=city, y=availability_30)) + 
+    geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings$city, y=listings$availability_30))
+
+first
+
+#Q2
+avgRevenue <- aggregate(listings$revenue_30, by=list(Category=listings$city), FUN=mean) 
+names(avgRevenue) <- c("listing_id","revenue")
+
+second <- ggplot(listings, aes(x=city, y=revenue_30)) + 
+    geom_boxplot() + ylim(0,5000) + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings$city, y=listings$revenue_30))
+
+abline(h = mean(revenue_30), color="blue")
+second
+
+#Q3
+third <- ggplot(listings, aes(x=availability_30, color=listings$city)) + 
+    geom_histogram(fill="grey", position="dodge") 
+third
+
+#Q4
+listing_bis <- listings %>% filter(revenue_30 > 0)
+
+fourth <- ggplot(listing_bis, aes(x=revenue_30, color=city)) + 
+    geom_histogram(fill="grey", position="dodge") + xlim(0,10000)
+fourth
+
+#Q5
+fifth <- ggplot(listings, aes(x = as.factor(bedrooms), y=revenue_30, fill=as.factor(city))) + 
+    geom_bar(position = position_dodge(),stat="identity")
+fifth
+
+#Q6
+sixth <- ggplot(listings, aes(x = as.factor(room_type))) + 
+    geom_bar(position = "dodge", aes(fill = as.factor(listings$city)))
+sixth
+
+## Analysis 2 ##
+
+#Q1
+seventh <- ggplot(listings, aes(x = as.factor(room_type))) + 
+    geom_bar(position = "dodge", aes(fill = as.factor(listings$city)))
+seventh
+
+
+#######
 # Analysis 1
 ## Find the average availability over 30 days of listings per each city
 
 #Compute the availability over 30 days
-avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
-names(avgAvailability) <- c("listing_id","availability")
-avgAvailability$availability <- avgAvailability$availability * 30
+#avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
+#names(avgAvailability) <- c("listing_id","availability")
+#avgAvailability$availability <- avgAvailability$availability * 30
 
 #Printing
-cat("\nAnalysis 1 - Q1&2\n")
-print(avgAvailability)
+#cat("\nAnalysis 1 - Q1&2\n")
+#print(avgAvailability)
+#######
+
 
 # Analysis 5
 ## Comparing the distribution of estimated revenue for the next 30 days of listings
 ## per each city.
-p <- ggplot(listings, aes(city, revenue_30))
-p + geom_boxplot(aes(colour = "red"), outlier.shape = NA) +
-    scale_y_continuous(limits = quantile(listings$revenue_30, c(0.1, 0.9), na.rm = T))
+#p <- ggplot(listings, aes(city, revenue_30))
+#p + geom_boxplot(aes(colour = "red"), outlier.shape = NA) +
+#   scale_y_continuous(limits = quantile(listings$revenue_30, c(0.1, 0.9), na.rm = T))
 
 # for this I chose to plot a boxplot to show the distribution
 # I could've used other types of plots! Be creative!
-
 
