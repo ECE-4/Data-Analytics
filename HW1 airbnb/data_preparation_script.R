@@ -4,7 +4,7 @@ library(ggplot2)
 library(data.table)
 library(reshape)
 
-setwd("~/Documents/Data-Analytics/HW1 airbnb/")
+setwd("C:/Users/alexd/Documents/travail/Ing5/Data-Analytics/HW1 airbnb")
 
 # a generic function to prepare data for a specific city
 prepare_data <- function(city)
@@ -204,16 +204,38 @@ eigth
 #    geom_histogram(position = "dodge", aes(fill = as.factor(listings$city)))
 #geom_histogram(position = "dodge", fill = as.factor(city))
 #ninth
-res <- aggregate(listings,by=list(listings$city=="malaga"), FUN="sum")
-res
 
-listings[city=="malaga"]
 
-ggplot(listings, aes(y=listings$city, x=neighbourhood_cleansed)) + 
-    geom_boxplot(notch=TRUE)
+
+listings_malaga <- listings %>% filter(city == "malaga")
+
+ggplot(listings_malaga, aes(x=neighbourhood_cleansed)) + geom_histogram(stat = "count") #for Malaga
+
 #Q4
 
+first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=availability_30))
+
+first
+
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=availability_30))
+
+snd
+
+thrd <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity", fun.y="mean") 
+
+thrd 
+
+
+
 #Q5
+
+first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=room_type, y=revenue_30))
+
+first
 
 #Q6
 
