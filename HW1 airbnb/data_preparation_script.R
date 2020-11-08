@@ -237,9 +237,19 @@ third
 #Q5
 
 first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + 
-  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=room_type, y=revenue_30))
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=revenue_30)) + ylim(0,4000)
 
 first
+
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=revenue_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=revenue_30)) +ylim(0,4000)
+
+snd
+
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=revenue_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="summary") 
+
+third 
 
 #Q6
 
