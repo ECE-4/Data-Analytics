@@ -235,10 +235,13 @@ eigth
 ```
 
 ***
-### Q3 (For Malaga)
+## Malaga
 ```{r}
 listings_malaga <- listings %>% filter(city == "malaga")
+```
 
+### Q3
+```{r}
 ggplot(listings_malaga, aes(x=neighbourhood_cleansed)) + geom_histogram(stat = "count") 
 ```
 
@@ -249,12 +252,16 @@ first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) +
   geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=availability_30))
 
 first
+```
 
+```{r}
 snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
   geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=availability_30))
 
 snd
+```
 
+```{r}
 third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
   geom_bar( stat="summary") 
 
@@ -264,17 +271,288 @@ third
 ***
 ### Q5
 ```{r}
-code
+first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=revenue_30)) + ylim(0,4000)
+
+first
+```
+
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=revenue_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=revenue_30)) +ylim(0,4000)
+
+snd
+```
+
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=revenue_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="summary") 
+
+third 
 ```
 
 ***
 ### Q6
+We can see that there are over 80k availibility days for Centro whereas there are a few for Campanillas
 ```{r}
-code
+first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) + 
+  geom_bar(stat = "identity") 
+
+first
+```
+
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
+  geom_bar(stat = "identity") 
+
+snd
+```
+
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity") 
+
+third 
 ```
 
 ***
 ### Q7
+We can see they will be over 7.5 milion dollars spent in malaga within the next 30 days only for home/apt. 
 ```{r}
-code
+first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + geom_bar(stat = "identity") 
+
+first
+# We can see they will be over 7.5 milion dollars spent in malaga within the next 30 days only for home/apt. 
+```
+
+In Malaga, within the enxt 30 days, the apt with one room will generate near 2.5 Milion dollars
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=revenue_30)) + geom_bar(stat = "identity") 
+
+snd
+#In Malaga, within the enxt 30 days, the apt with one room will generate near 2.5 Milion dollars
+```
+
+The centro will bring over 4.7 milion euro in the next 30 days 
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=revenue_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity") 
+
+third 
+```
+
+
+***
+## Mallorca
+```{r}
+listings_malaga <- listings %>% filter(city == "mallorca")
+```
+
+### Q3
+```{r}
+ggplot(listings_malaga, aes(x=neighbourhood_cleansed)) + geom_histogram(stat = "count") 
+```
+
+***
+### Q4
+```{r}
+first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=availability_30))
+
+first
+```
+
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=availability_30))
+
+snd
+```
+
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="summary") 
+
+third
+```
+
+***
+### Q5
+```{r}
+first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=revenue_30)) + ylim(0,4000)
+
+first
+```
+
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=revenue_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=revenue_30)) +ylim(0,4000)
+
+snd
+```
+
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=revenue_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="summary") 
+
+third 
+```
+
+***
+### Q6
+We can see that there are over 80k availibility days for Centro whereas there are a few for Campanillas
+```{r}
+first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) + 
+  geom_bar(stat = "identity") 
+
+first
+```
+
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
+  geom_bar(stat = "identity") 
+
+snd
+```
+
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity") 
+
+third 
+```
+
+***
+### Q7
+We can see they will be over 7.5 milion dollars spent in malaga within the next 30 days only for home/apt. 
+```{r}
+first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + geom_bar(stat = "identity") 
+
+first
+# We can see they will be over 7.5 milion dollars spent in malaga within the next 30 days only for home/apt. 
+```
+
+In Malaga, within the enxt 30 days, the apt with one room will generate near 2.5 Milion dollars
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=revenue_30)) + geom_bar(stat = "identity") 
+
+snd
+#In Malaga, within the enxt 30 days, the apt with one room will generate near 2.5 Milion dollars
+```
+
+The centro will bring over 4.7 milion euro in the next 30 days 
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=revenue_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity") 
+
+third 
+```
+
+
+***
+## Sevilla
+```{r}
+listings_malaga <- listings %>% filter(city == "sevilla")
+```
+
+### Q3
+```{r}
+ggplot(listings_malaga, aes(x=neighbourhood_cleansed)) + geom_histogram(stat = "count") 
+```
+
+***
+### Q4
+```{r}
+first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=availability_30))
+
+first
+```
+
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=availability_30))
+
+snd
+```
+
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="summary") 
+
+third
+```
+
+***
+### Q5
+```{r}
+first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=revenue_30)) + ylim(0,4000)
+
+first
+```
+
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=revenue_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=revenue_30)) +ylim(0,4000)
+
+snd
+```
+
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=revenue_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="summary") 
+
+third 
+```
+
+***
+### Q6
+We can see that there are over 80k availibility days for Centro whereas there are a few for Campanillas
+```{r}
+first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) + 
+  geom_bar(stat = "identity") 
+
+first
+```
+
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
+  geom_bar(stat = "identity") 
+
+snd
+```
+
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity") 
+
+third 
+```
+
+***
+### Q7
+We can see they will be over 7.5 milion dollars spent in malaga within the next 30 days only for home/apt. 
+```{r}
+first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + geom_bar(stat = "identity") 
+
+first
+# We can see they will be over 7.5 milion dollars spent in malaga within the next 30 days only for home/apt. 
+```
+
+In Malaga, within the enxt 30 days, the apt with one room will generate near 2.5 Milion dollars
+```{r}
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=revenue_30)) + geom_bar(stat = "identity") 
+
+snd
+#In Malaga, within the enxt 30 days, the apt with one room will generate near 2.5 Milion dollars
+```
+
+The centro will bring over 4.7 milion euro in the next 30 days 
+```{r}
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=revenue_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity") 
+
+third 
 ```
