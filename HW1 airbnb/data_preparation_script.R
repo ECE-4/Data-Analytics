@@ -2,6 +2,7 @@ library(dplyr)
 library(stringr)
 library(ggplot2)
 library(data.table)
+library(reshape)
 
 setwd("~/Documents/Data-Analytics/HW1 airbnb/")
 
@@ -147,8 +148,8 @@ listings <- rbind(malaga, mallorca, sevilla)
 listings$bedrooms <- ifelse(listings$bedrooms >= 5, "5+", listings$bedrooms)
 
 
-################
-
+                        ################ Work ################ 
+typeof(listings)
 ## Analysis 1 ##
 
 #Q1
@@ -158,13 +159,12 @@ first <- ggplot(listings, aes(x=city, y=availability_30)) +
 first
 
 #Q2
-avgRevenue <- aggregate(listings$revenue_30, by=list(Category=listings$city), FUN=mean) 
-names(avgRevenue) <- c("listing_id","revenue")
+avgRevenue <- aggregate(listings$revenue_30, by=list(Category=listings$city), FUN=mean)
 
 second <- ggplot(listings, aes(x=city, y=revenue_30)) + 
     geom_boxplot() + ylim(0,5000) + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings$city, y=listings$revenue_30))
 
-abline(h = mean(revenue_30), color="blue")
+abline(h = mean(revenue_30))
 second
 
 #Q3
@@ -185,9 +185,7 @@ fifth <- ggplot(listings, aes(x = as.factor(bedrooms), y=revenue_30, fill=as.fac
 fifth
 
 #Q6
-sixth <- ggplot(listings, aes(x = as.factor(room_type))) + 
-    geom_bar(position = "dodge", aes(fill = as.factor(listings$city)))
-sixth
+revenue_by_bedroom_size <- cast(listings, city ~ bedrooms, length)
 
 ## Analysis 2 ##
 
@@ -196,6 +194,28 @@ seventh <- ggplot(listings, aes(x = as.factor(room_type))) +
     geom_bar(position = "dodge", aes(fill = as.factor(listings$city)))
 seventh
 
+#Q2
+eigth <- ggplot(listings, aes(x = as.factor(bedrooms))) + 
+    geom_bar(position = "dodge", aes(fill = as.factor(listings$city)))
+eigth
+
+#Q3 We take Malaga city
+#ninth <- ggplot(listings, aes(x = as.factor(neighbourhood_cleansed))) + 
+#    geom_histogram(position = "dodge", aes(fill = as.factor(listings$city)))
+#geom_histogram(position = "dodge", fill = as.factor(city))
+#ninth
+res <- aggregate(listings,by=list(listings$city=="malaga"), FUN="sum")
+res
+
+listings[city=="malaga"]
+
+ggplot(listings, aes(y=listings$city, x=neighbourhood_cleansed)) + 
+    geom_boxplot(notch=TRUE)
+#Q4
+
+#Q5
+
+#Q6
 
 #######
 # Analysis 1
