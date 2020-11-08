@@ -253,28 +253,37 @@ third
 
 #Q6
 
-#######
-# Analysis 1
-## Find the average availability over 30 days of listings per each city
+first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) + 
+  geom_bar(stat = "identity") 
 
-#Compute the availability over 30 days
-#avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
-#names(avgAvailability) <- c("listing_id","availability")
-#avgAvailability$availability <- avgAvailability$availability * 30
+first
 
-#Printing
-#cat("\nAnalysis 1 - Q1&2\n")
-#print(avgAvailability)
-#######
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
+  geom_bar(stat = "identity") 
 
+snd
 
-# Analysis 5
-## Comparing the distribution of estimated revenue for the next 30 days of listings
-## per each city.
-#p <- ggplot(listings, aes(city, revenue_30))
-#p + geom_boxplot(aes(colour = "red"), outlier.shape = NA) +
-#   scale_y_continuous(limits = quantile(listings$revenue_30, c(0.1, 0.9), na.rm = T))
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity") 
 
-# for this I chose to plot a boxplot to show the distribution
-# I could've used other types of plots! Be creative!
+third 
+# we can see that there are over 80k availibility days for Centro whereas there are a few for CAmpanillas
 
+#Q7
+
+first <- ggplot(listings_malaga, aes(x=room_type, y=revenue_30)) + geom_bar(stat = "identity") 
+
+first
+# We can see they will be over 7.5 milion dollars spent in malaga within the next 30 days only for home/apt. 
+
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=revenue_30)) + geom_bar(stat = "identity") 
+
+snd
+#In Malaga, within the enxt 30 days, the apt with one room will generate near 2.5 Milion dollars
+
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=revenue_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="identity") 
+
+third 
+
+#The centro will bring over 4.7 milion euro in the next 30 days 
