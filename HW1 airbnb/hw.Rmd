@@ -3,6 +3,16 @@ title: "R Notebook"
 output: html_notebook
 ---
 
+Made by the team composed of:
+
+    Dalmasso Olivia
+    
+    Direz Alexis
+    
+    Ségard Neil
+    
+    Ye Sébastien
+
 # Importation & preparation
 ***
 ### Importing libraries
