@@ -181,11 +181,15 @@ fourth
 
 #Q5
 fifth <- ggplot(listings, aes(x = as.factor(bedrooms), y=revenue_30, fill=as.factor(city))) + 
-    geom_bar(position = position_dodge(),stat="identity")
+    geom_bar(position = position_dodge() ,stat="summary") 
 fifth
 
 #Q6
-revenue_by_bedroom_size <- cast(listings, city ~ bedrooms, length)
+
+sixth <- ggplot(listings, aes(x = as.factor(room_type), y=revenue_30, fill=as.factor(city))) + 
+  geom_bar(position = position_dodge() ,stat="summary") 
+sixth
+
 
 ## Analysis 2 ##
 
@@ -223,10 +227,10 @@ snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) +
 
 snd
 
-thrd <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
-  geom_bar( stat="identity", fun.y="mean") 
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="summary") 
 
-thrd 
+third 
 
 
 
