@@ -3,213 +3,278 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-# Importation
+# Importation & preparation
 ***
 ### Importing libraries
 ```{r}
-library(stringr)
 library(dplyr)
+library(stringr)
+library(ggplot2)
+library(data.table)
 library(reshape)
 ```
 
 ***
-### Getting Calendars
+### Prepare the data
 ```{r}
-#Get the data
-malagaCal <- read.csv(file = 'data/malaga/calendar.csv')
-mallorcaCal <- read.csv(file = 'data/mallorca/calendar.csv')
-sevillaCal <- read.csv(file = 'data/sevilla/calendar.csv')
-
-#Add the city
-malagaCal$city="malaga"
-mallorcaCal$city="mallorca"
-sevillaCal$city="sevilla"
-
-#concatenate all the data
-calendars <- rbind(malagaCal, mallorcaCal, sevillaCal)
+prepare_data <- function(city)
+{
+    # Cleaning listings dataframe
+    
+    # suppose raw data is stored in data_raw/city/listings.csv.gz
+    listings_url <- file.path("data", city, "listings.csv")
+    # suppose raw data is stored in data_raw/city/data_date/calendar.csv.gz
+    calendar_url <- file.path("data", city, "calendar.csv")
+    
+    print(paste0("reading data from ", listings_url))
+    listings <- read.csv(gzfile(listings_url))
+    print(paste0("reading data from ", calendar_url))
+    calendar <- read.csv(gzfile(calendar_url))
+    
+    ## Add Keys: columns city and day date
+    listings$city <- city
+    
+    ## Select interesting columns
+    ### Most columns don't contain interesting information
+    columns_listings <- c("city", "id", "neighbourhood_cleansed", 
+                          "latitude", "longitude", 
+                          "property_type", "room_type", "accommodates", "bedrooms", 
+                          "beds", "price", "minimum_nights",  "maximum_nights")
+    
+    listings <- listings %>% 
+        select(columns_listings) %>% 
+        arrange(id)
+    
+    # Cleaning calendar dataframe
+    
+    ## arrange by id and date
+    calendar <- calendar %>% 
+        arrange(listing_id, date)
+    
+    ## add day number (starting first day)
+    calendar <- calendar %>%
+        group_by(listing_id) %>%
+        mutate(day_nb = row_number()) %>%
+        ungroup()
+    
+    ## change available column to binary
+    calendar <- calendar %>%
+        mutate(available = ifelse(available=="t", 1, 0))
+    
+    ## clean price column and transform to numeric
+    calendar <- calendar %>%
+        mutate(price = str_replace(price, "\\$", ""),
+               adjusted_price = str_replace(adjusted_price, "\\$", ""))
+    calendar <- calendar %>%
+        mutate(price = str_replace(price, ",", ""),
+               adjusted_price = str_replace(adjusted_price, ",", ""))
+    calendar <- calendar %>%
+        mutate(price = as.numeric(price),
+               adjusted_price = as.numeric(adjusted_price))
+    
+    ## calculate estimated revenue for upcoming day
+    calendar <- calendar %>%
+        mutate(revenue = price*(1-available))
+    
+    ## calculate availability, price, revenue for next 30, 60 days ... for each listing_id
+    calendar <- calendar %>%
+        group_by(listing_id) %>%
+        summarise(availability_30 = sum(available[day_nb<=30], na.rm = TRUE),
+                  #availability_60 = sum(available[day_nb<=60], na.rm = TRUE),
+                  #availability_90 = sum(available[day_nb<=90], na.rm = TRUE),
+                  #availability_365 = sum(available[day_nb<=365], na.rm = TRUE),
+                  price_30 = mean(price[day_nb<=30 & available==0], na.rm = TRUE),
+                  #price_60 = mean(price[day_nb<=60 & available==0], na.rm = TRUE),
+                  #price_90 = mean(price[day_nb<=90 & available==0], na.rm = TRUE),
+                  #price_365 = mean(price[day_nb<=365 & available==0], na.rm = TRUE),
+                  revenue_30 = sum(revenue[day_nb<=30], na.rm = TRUE),
+                  #revenue_60 = sum(revenue[day_nb<=60], na.rm = TRUE),
+                  #revenue_90 = sum(revenue[day_nb<=90], na.rm = TRUE),
+                  #revenue_365 = sum(revenue[day_nb<=365], na.rm = TRUE)           
+        )
+    
+    listings_cleansed <- listings %>% left_join(calendar, by = c("id" = "listing_id"))
+    
+    dir.create(file.path("data_cleansed", city), recursive = TRUE)
+    
+    write.csv(listings_cleansed, file.path("data_cleansed", city, "listings.csv"))
+    print(paste0("saving data into ", file.path("data_cleansed", city, "listings.csv")))
+    
+}  
 ```
 
 ***
-### Getting Listing
+### Example: Prepare data for multiple cities
 ```{r}
-#Get the data
-malagaList <- read.csv(file = 'data/malaga/listings.csv')
-mallorcaList <- read.csv(file = 'data/mallorca/listings.csv')
-sevillaList <- read.csv(file = 'data/sevilla/listings.csv')
+cities <- c("malaga", "mallorca", "sevilla")
 
-#Add the city
-malagaList$city="malaga"
-mallorcaList$city="mallorca"
-sevillaList$city="sevilla"
-
-#concatenate all the data
-listings <- dplyr::bind_rows(malagaList, mallorcaList, sevillaList)
-```
-Note: The mallorca dataframe doesnt have the same columns as the other sets, so the bind_rows function will put NA when there is no data
-
-***
-### Declaring a function
-Will be useful to print pretty proportions
-```{r}
-percent <- function(x, digits = 2, format = "f", ...) {
-  paste0(formatC(x * 100, format = format, digits = digits, ...), " %")
+for(i in 1:length(cities)){
+    city <- cities[i]
+    print("-------------------------------------------------")
+    print(paste(c("Preparing data for", city), collapse = " "))
+    prepare_data(city)
 }
 ```
 
 ***
+### Clean Environment
+```{r}
+#rm(list=ls())
+```
+Once data for multiple cities are prepared
+We can read these data and concatenate them together into one dataframe
+
+***
+### Reading cleansed data
+```{r}
+cities <- c("malaga", "mallorca", "sevilla")
+files_paths <- c()
+```
+
+***
+### Read data in cities between min_date and max_date
+```{r}
+for(city in cities){
+    file_dir <- file.path(".", "data_cleansed", city)
+    file_subdirs <- list.dirs(file_dir)
+    file_subdirs <- file_subdirs[-1]
+    
+    for(file_subdir in file_subdirs){
+        if(file_subdir < file.path(file_dir, min_date) | file_subdir > file.path(file_dir, max_date)  )
+            file_subdirs = file_subdirs[file_subdirs != file_subdir]
+    }
+    files_paths <- c(files_paths, file_subdirs)
+}
+files_paths <- file.path(files_paths, "listings.csv")
+
+```
+
+***
+```{r}
+malaga <- read.csv(file="data_cleansed/malaga/listings.csv")
+mallorca <- read.csv(file="data_cleansed/mallorca/listings.csv")
+sevilla <- read.csv(file="data_cleansed/sevilla/listings.csv")
+
+listings <- rbind(malaga, mallorca, sevilla)
+```
+
+***
 # Analysis 1
-### Point 1&2
+
+***
+### Q1
 ```{r}
-#preprocess the availability
-calendars$available <- ifelse(calendars$available=="t", 1, 0)
+first <- ggplot(listings, aes(x=city, y=availability_30)) + 
+    geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=city, y=availability_30))
 
-#Compute the availability over 30 days
-avgAvailability <- aggregate(calendars$available, by=list(Category=calendars$city), FUN=mean)
-names(avgAvailability) <- c("listing_id","availability")
-avgAvailability$availability <- avgAvailability$availability * 30
-
-#Printing
-print(avgAvailability)
+first
 ```
 
 ***
-### Point 3&4
+### Q2
 ```{r}
-#Cleaning the prices
-calendars$adjusted_price <- str_replace_all(calendars$adjusted_price,"\\$","")
-calendars$adjusted_price <- str_replace_all(calendars$adjusted_price,",","")
-calendars$adjusted_price[calendars$adjusted_price==""] <- 0
-calendars$adjusted_price <- as.numeric(calendars$adjusted_price)
+avgRevenue <- aggregate(listings$revenue_30, by=list(Category=listings$city), FUN=mean)
 
-#Computing the average revenue over 30 days
-calendars$revenue <- (1-calendars$available) * calendars$adjusted_price
-avgRevenue <- aggregate(calendars$revenue, by=list(Category=calendars$city), FUN=mean)
-names(avgRevenue) <- c("listing_id","revenue")
+second <- ggplot(listings, aes(x=city, y=revenue_30)) + 
+    geom_boxplot() + ylim(0,5000) + stat_summary(fun=mean ,geom="point",color="red", aes(x=listings$city, y=listings$revenue_30))
 
-#Printing
-print(avgRevenue)
+abline(h = mean(listings$revenue_30))
+second
 ```
 
 ***
-### Point 5
+### Q3
 ```{r}
-res <- aggregate(listings$availability_30, by = list(listings$city), FUN=mean)
-names(res) <- c("city","avg_next_30d")
-
-#Printing
-print(res)
+third <- ggplot(listings, aes(x=availability_30, color=city)) + 
+    geom_histogram(fill="grey", position="dodge") 
+third
 ```
 
 ***
-### Point 6
+### Q4
 ```{r}
-listings$price <- str_replace_all(listings$price,"\\$","")
-listings$price <- str_replace_all(listings$price,",","")
-listings$price[listings$price==""] <- 0
-listings$price <- as.numeric(listings$price)
+listing_bis <- listings %>% filter(revenue_30 > 0)
 
-listings$revenue_30 <- listings$availability_30 * listings$price
-res <- aggregate(listings$revenue_30 , by = list(listings$city), FUN=mean)
-names(res) <- c("city","revenue_next_30d")
-
-#Printing
-print(res)
+fourth <- ggplot(listing_bis, aes(x=revenue_30, color=city)) + 
+    geom_histogram(fill="grey", position="dodge") + xlim(0,10000)
+fourth
 ```
 
 ***
-### Point 7
+### Q5
 ```{r}
-revenue_by_bedroom_size <- cast(listings, city ~ bedrooms, length)
-
-#Printing
-print(revenue_by_bedroom_size)
+fifth <- ggplot(listings, aes(x = as.factor(bedrooms), y=revenue_30, fill=as.factor(city))) + 
+    geom_bar(position = position_dodge() ,stat="summary") 
+fifth
 ```
 
 ***
-### Point 8
+### Q6
 ```{r}
-revenue_by_roomtype<- cast(listings, city ~ room_type, length)
-
-#Printing
-print(revenue_by_roomtype)
+sixth <- ggplot(listings, aes(x = as.factor(room_type), y=revenue_30, fill=as.factor(city))) + 
+  geom_bar(position = position_dodge() ,stat="summary") 
+sixth
 ```
-
-
-
 
 ***
 # Analysis 2
-### Point 1
+***
+### Q1
 ```{r}
-#Computing the proportion
-roomTypes <- aggregate(listings$room_type, by=list(Category=listings$room_type), FUN=length)
-names(roomTypes) <- c("room_type","proportion")
-roomTypes$proportion <- roomTypes$proportion / sum(roomTypes$proportion) #compute a %
-roomTypes <- arrange(roomTypes, desc(proportion)) #sort
-roomTypes$proportion <- percent(roomTypes$proportion) #convert to %
-
-#Printing
-print(roomTypes)
+seventh <- ggplot(listings, aes(x = as.factor(room_type))) + 
+    geom_bar(position = "dodge", aes(fill = as.factor(city)))
+seventh
 ```
 
 ***
-### Point 2
+### Q2
 ```{r}
-#Computing the proportion
-houseSize <- aggregate(listings$bedrooms, by=list(Category=listings$bedrooms), FUN=length)
-names(houseSize) <- c("bedrooms","proportion")
-houseSize$proportion <- houseSize$proportion / sum(houseSize$proportion) #compute a %
-houseSize <- arrange(houseSize, desc(proportion)) #sort
-houseSize$proportion <- percent(houseSize$proportion) #convert to %
-
-#Printing
-print(houseSize)
+eigth <- ggplot(listings, aes(x = as.factor(bedrooms))) + 
+    geom_bar(position = "dodge", aes(fill = as.factor(city)))
+eigth
 ```
 
 ***
-### Point 3
+### Q3 (For Malaga)
 ```{r}
-#Computing the neighbourhood proportion
-nbhProp <- aggregate(listings$neighbourhood_group_cleansed, by=list(Category=listings$neighbourhood_group_cleansed), FUN=length)
-names(nbhProp) <- c("neighbourhood_group_cleansed","proportion")
-nbhProp$proportion <- nbhProp$proportion / sum(nbhProp$proportion) #compute a %
-nbhProp <- arrange(nbhProp, desc(proportion)) #sort
-nbhProp$proportion <- percent(nbhProp$proportion) #convert to %
+listings_malaga <- listings %>% filter(city == "malaga")
 
-#Printing
-cat("\nAnalysis 2 - Q3\n")
-print(nbhProp)
+ggplot(listings_malaga, aes(x=neighbourhood_cleansed)) + geom_histogram(stat = "count") 
 ```
 
 ***
-### Point 4 ??? c'est un copier coller de la A1Q7 c'est normal ?
+### Q4
 ```{r}
-revenue_by_bedroom_size <- cast(listings, city ~ room_type, length)
+first <- ggplot(listings_malaga, aes(x=room_type, y=availability_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$room_type, y=availability_30))
 
-#Printing
-print(revenue_by_bedroom_size)
+first
+
+snd <- ggplot(listings_malaga, aes(x=bedrooms, y=availability_30)) + 
+  geom_boxplot() + stat_summary(fun.y=mean ,geom="point",color="red", aes(x=listings_malaga$bedrooms, y=availability_30))
+
+snd
+
+third <- ggplot(listings_malaga, aes(x=neighbourhood_cleansed, y=availability_30, fill=as.factor(x = neighbourhood_cleansed) )) + 
+  geom_bar( stat="summary") 
+
+third
 ```
 
 ***
-### Point 5
+### Q5
 ```{r}
-#code
+code
 ```
 
 ***
-### Point 6
+### Q6
 ```{r}
-#code
+code
 ```
 
 ***
-### Point 7
+### Q7
 ```{r}
-#code
-```
-
-***
-### Point 8
-```{r}
-#code
+code
 ```
