@@ -1,4 +1,4 @@
-*.csv
+HW1 airbnb/**/*.csv
 .DS_Store
 
 # History files
