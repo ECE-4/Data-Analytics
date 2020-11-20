@@ -1813,24 +1813,38 @@ summary {
 <h1 class="title toc-ignore">Week7</h1>
 <h3 class="subtitle">Clustering</h3>
 <h4 class="author">Segard Neil</h4>
-<h4 class="date">2020-11-20 09:35:22</h4>
+<h4 class="date">2020-11-20 09:44:14</h4>
 
 </div>
 
 
 <!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeShrbml0cilcbmxpYnJhcnkoZHBseXIpXG5gYGAifQ== -->
+<pre class="r"><code>library(knitr)
+library(dplyr)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <hr />
 <p>Q1 Reading file</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZSA8LSBcImxpZ3VlMV8xN18xOC5jc3ZcIlxuXG5kYXRhIDwtIHJlYWQuY3N2KGZpbGUsIHNlcCA9XCI7XCIsIHJvdy5uYW1lcz0gMSlcblxucHJpbnQoaGVhZChkYXRhLCAyKSlcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZSA8LSBcImxpZ3VlMV8xN18xOC5jc3ZcIlxuZGF0YSA8LSByZWFkLmNzdihmaWxlLCBzZXAgPVwiO1wiLCByb3cubmFtZXM9IDEpXG5gYGAifQ== -->
 <pre class="r"><code>file &lt;- &quot;ligue1_17_18.csv&quot;
-
-data &lt;- read.csv(file, sep =&quot;;&quot;, row.names= 1)
-
-print(head(data, 2))</code></pre>
+data &lt;- read.csv(file, sep =&quot;;&quot;, row.names= 1)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6MjB9LCJyZGYiOiJINHNJQUFBQUFBQUFCblZUUFd3VE1SUjJMN25RaEtZdEl0QlNpWjhGS1V0Y1dzU0lkSUtJTEVVTklFU0Z5dUQ2Zk1tcGpoM3NDd1YySm9iT3NESWlNVE16dzh6Y25SWEd3dk9kZlhVUDlhUlA4ZmU5WHorL1BPN3YzRzd0dEJCQ05WUkhBYXFGY0VTTis4T056VHViQ05VRFlITmdhWnJmMStCMUVRNGRRQnRnakM4QVE0OWZCYXg2dkFHWTkzak5hbzV6d05OS2ZNL2oyNEF1WU5Id3FQYkJmQjhqZERUNDBubDdWS2xUOC9nOXdBT1Byd051ZXR6MGRMN01lMnZoTzN3L292WGQ3dTl2aDd1bHZtWlk5MC9Vbkg3NjJicjdzdFMzUDcrNzl2WFJyMmdMVkRCNWVmZnNUQnluZ09jbitRci82TXBoWHNqemV3L1FIazhCMDhvRGhJSk1tSEZhemgraEVCdERtWXBNVzFaL2xncDNEdnVLSEpSa1Mycm15TUpBRXE2eHBsS3gyR3FMaFVhbG9Dd3UxZVYrbWlSTU1SRHh5RGhZZmFtb2lxZE00UkYwWmVVbTVNT1VxTGlzOUlaeExnOU9hU3VVTXlLd0hqTldaS0JNWkdUa2Nxd2xKT1dRSnBORmcvOTdyT2l4dExVbkpLTmpURjR4ZFdLK1hwaWx5RHMrMCszR0h1RmdsUnJtb2xQd2RuZXArRjNTc3dtV1NhTFRtT0ZVWUpKbGhPNWI0K1dLTVdZSkU5cUZya0wvZ2lsOVZ1cDJJbWN3ODBRcURIbXNlS0VReVlqQVUyYTU0ZlFhTkJVTTFGK0Z3QnJtaDBTbHV2ZGs0RmJqb1JTRXl1b1dVVTYwQzNWaUt5WVp3WWt5VDRuUWNTWGtuSnhtTUNFSUNzei9QNndFejZtS3NEUVRwcis0UjhjenNkL2JNQVZ5YzRHMi9RMjhjNmNvR2Z5MXFVSjNCeVpHcVhBREN6blpZOXh0TE13aEh3T2VLbGhHZHhOUU5TeFBScHhmaTBydWxQeHU2UGdmTWhEanl2Y0VBQUE9In0= -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+<p>Q2 Printing dataframe infos</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoaGVhZChkYXRhLCAyKSlcbmBgYCJ9 -->
+<pre class="r"><code>print(head(data, 2))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6MiwibmNvbCI6MjB9LCJyZGYiOiJINHNJQUFBQUFBQUFCblZUUFd3VE1SUjJMN25RaEtZdEl0QlNpWjhGS1V0Y2FNV0lkSUtJTEVVTklFU0Z5dUQ2Zk1tcGpoM3NDd1YySm9iT3NESWlNVE16dzh6Y25SWEd3dk9kZlhVUDlhUlA4ZmU5WHorL1BPN3ZiTFoyV2dpaEdxcWpBTlZDT0tMRy9lSHRqVHNiQ05VRFlITmdhWnJmMStCMUVRNGRRQnRnakM4QVE0OWZCYXg2dkFHWTkzak5hbzV6d05OS2ZNL2oyNEF1WU5Id3FQYkJmQjhqZERUNDBubDdWS2xUOC9nOXdBT1Byd051ZXR6MGRMN01lMnZoTzN3L292WGQ3dTl2aDd1bHZtWlk5MC9Vbkg3NjJicjdzdFMzUDcrNzl2WFJyMmdMVkRCNWVmZnNUQnluZ09jbitRci82TXBoWHNqemV3L1FIazhCMDhvRGhJSk1tSEZhemgraEVCdERtWXBNVzFaL2xncDNEdnVLSEpSa1Mycm15TUpBRXE2eHBsS3gyR3FMaFVhbG9Dd3UxZVYrbWlSTU1SRHh5RGhZZmFtb2lxZE00UkYwWmVVbTVNT1VxTGlzOUlaeExnOU9hU3VVTXlLd0hqTldaS0JNWkdUa2Nxd2xKT1dRSnBORmcvOTdyT2l4dExVbkpLTmpURjR4ZFdLK1hwaWx5RHMrMCszR0h1RmdsUnJtb2xQd2RuZXArRjNTc3dtV1NhTFRtT0ZVWUpKbGhPNWI0K1dLTVdZSkU5cUZya0wvZ2lsOVZ1cDJJbWN3ODBRcURIbXNlS0VReVlqQVUyYTU0ZlFhTkJVTTFGK0Z3QnJtaDBTbHV2ZGs0RmJqb1JTRXl1b1dVVTYwQzNWaUt5WVp3WWt5VDRuUWNTWGtuSnhtTUNFSUNzei9QNndFejZtS3NEUVRwcis0UjhjenNkL2JOQVZ5YzRHMi9RMjhjNmNvR2Z5MXFVSjNCeVpHcVhBREN6blpZOXh0TE13aEh3T2VLbGhHZHhOUU5TeFBScHhmaTBydWxQeHU2UGdmZGxSZkRQY0VBQUE9In0= -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Points"],"name":[1],"type":["int"],"align":["right"]},{"label":["Wins"],"name":[2],"type":["int"],"align":["right"]},{"label":["Draws"],"name":[3],"type":["int"],"align":["right"]},{"label":["Loses"],"name":[4],"type":["int"],"align":["right"]},{"label":["Goals.scored"],"name":[5],"type":["int"],"align":["right"]},{"label":["Goals.conceded"],"name":[6],"type":["int"],"align":["right"]},{"label":["Difference.goals"],"name":[7],"type":["int"],"align":["right"]},{"label":["Points.per.game"],"name":[8],"type":["dbl"],"align":["right"]},{"label":["red.cards"],"name":[9],"type":["int"],"align":["right"]},{"label":["yellow.cards"],"name":[10],"type":["int"],"align":["right"]},{"label":["clean.sheets.percentage"],"name":[11],"type":["int"],"align":["right"]},{"label":["failed.to.score.percentage"],"name":[12],"type":["int"],"align":["right"]},{"label":["shots.per.match.average"],"name":[13],"type":["dbl"],"align":["right"]},{"label":["shots.on.goal.per.match.average"],"name":[14],"type":["dbl"],"align":["right"]},{"label":["ball.possession.per.game.average"],"name":[15],"type":["dbl"],"align":["right"]},{"label":["sum.offside.in.attack"],"name":[16],"type":["int"],"align":["right"]},{"label":["sum.offside.in.defense"],"name":[17],"type":["int"],"align":["right"]},{"label":["corners.per.game.average"],"name":[18],"type":["dbl"],"align":["right"]},{"label":["fouls.for.sum"],"name":[19],"type":["int"],"align":["right"]},{"label":["fouls.against.sum"],"name":[20],"type":["int"],"align":["right"]}],"data":[{"1":"93","2":"29","3":"6","4":"3","5":"108","6":"29","7":"79","8":"2.45","9":"6","10":"66","11":"47","12":"8","13":"16.05","14":"6.74","15":"63.34","16":"98","17":"99","18":"6.71","19":"139","20":"105","_rn_":"Paris-SG"},{"1":"80","2":"24","3":"8","4":"6","5":"85","6":"45","7":"40","8":"2.11","9":"3","10":"70","11":"37","12":"11","13":"15.68","14":"3.18","15":"57.68","16":"93","17":"90","18":"6.39","19":"115","20":"112","_rn_":"Monaco"}],"options":{"columns":{"min":{},"max":[10],"total":[20]},"rows":{"min":[10],"max":[10],"total":[2]},"pages":{}}}
@@ -1838,8 +1852,53 @@ print(head(data, 2))</code></pre>
 </div>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQobnJvdyhkYXRhKSlcbmBgYCJ9 -->
+<pre class="r"><code>print(nrow(data))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDIwXG4ifQ== -->
+<pre><code>[1] 20</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVzdCA8LSBrbml0cjo6a2FibGUoZGF0YVsxOjUsMTo1XSlcbnByaW50KGhlYWQodGVzdCkpXG5gYGAifQ== -->
+<pre class="r"><code>test &lt;- knitr::kable(data[1:5,1:5])
+print(head(test))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIFwifCAgICAgICAgICB8IFBvaW50c3wgV2luc3wgRHJhd3N8IExvc2VzfCBHb2Fscy5zY29yZWR8XCJcblsyXSBcInw6LS0tLS0tLS0tfC0tLS0tLTp8LS0tLTp8LS0tLS06fC0tLS0tOnwtLS0tLS0tLS0tLS06fFwiXG5bM10gXCJ8UGFyaXMtU0cgIHwgICAgIDkzfCAgIDI5fCAgICAgNnwgICAgIDN8ICAgICAgICAgIDEwOHxcIlxuWzRdIFwifE1vbmFjbyAgICB8ICAgICA4MHwgICAyNHwgICAgIDh8ICAgICA2fCAgICAgICAgICAgODV8XCJcbls1XSBcInxMeW9uICAgICAgfCAgICAgNzh8ICAgMjN8ICAgICA5fCAgICAgNnwgICAgICAgICAgIDg3fFwiXG5bNl0gXCJ8TWFyc2VpbGxlIHwgICAgIDc3fCAgIDIyfCAgICAxMXwgICAgIDV8ICAgICAgICAgICA4MHxcIlxuIn0= -->
+<pre><code>[1] &quot;|          | Points| Wins| Draws| Loses| Goals.scored|&quot;
+[2] &quot;|:---------|------:|----:|-----:|-----:|------------:|&quot;
+[3] &quot;|Paris-SG  |     93|   29|     6|     3|          108|&quot;
+[4] &quot;|Monaco    |     80|   24|     8|     6|           85|&quot;
+[5] &quot;|Lyon      |     78|   23|     9|     6|           87|&quot;
+[6] &quot;|Marseille |     77|   22|    11|     5|           80|&quot;</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<hr />
+<p>Q3 Printing dataframe infos</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXh0cmFjdCA8LSBzZWxlY3QoZGF0YSwgXCJQb2ludHNcIiwgXCJ5ZWxsb3cuY2FyZHNcIilcbnByaW50KGhlYWQoZXh0cmFjdCkpXG5gYGAifQ== -->
+<pre class="r"><code>extract &lt;- select(data, &quot;Points&quot;, &quot;yellow.cards&quot;)
+print(head(extract))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVFVVXZETUJET3VyWnV4YW5nNzJqQmlRcStDRk1Vd1c1bHZ1ekZoN09OV295WGtiUzQvZm5wcFUyZzVPRWo5MzEzOTEzdTFnK2J5MlNUTU1iR0xHUUJHMGNVc3ZpK3VKaGZ6UmtMQTJJanlrek51Nk9xY3dxTU9ETmxoRGRDUVZnU2NzSXQ0V2FRWHhBZUxWYUVPOEt6Wnh3aC9IQk53VmxuM290eElXdHN0R1hIZXk2RS9NMUtVSlgyMnFlS0VrT0wyQ1ltQmFoYXA2OVB6aktYQ0tXMExIelpTM1FXT1NqTmF5RzRLMTF6Uk82bVR4WlNWUnphbmYveFVvQjJVNTJZVk5CQTlxSG9ROFFPWHN1UjNEYTFSR29LekNranIzbWtQT0cwUmJOYWxaWmZMWDZuMTJaQWwrNHhzMjg4aUlOK1pQQm5yU0szRThmUEd0MkdrWUIzTGl3NW9STjJGOHkyaXE3dU5pRlZaNDFzd05VbHBSUk82WFpqaDMvZVZjOGhRZ0lBQUE9PSJ9 -->
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Points"],"name":[1],"type":["int"],"align":["right"]},{"label":["yellow.cards"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"93","2":"66","_rn_":"Paris-SG"},{"1":"80","2":"70","_rn_":"Monaco"},{"1":"78","2":"70","_rn_":"Lyon"},{"1":"77","2":"79","_rn_":"Marseille"},{"1":"58","2":"63","_rn_":"Rennes"},{"1":"55","2":"73","_rn_":"Bordeaux"}],"options":{"columns":{"min":{},"max":[10],"total":[2]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
+  </script>
+</div>
+<!-- rnb-frame-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWs3Ig0Kc3VidGl0bGU6ICJDbHVzdGVyaW5nIg0KYXV0aG9yOiBTZWdhcmQgTmVpbA0KZGF0ZTogImByIGZvcm1hdChTeXMudGltZSgpKWAiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19kZXB0aDogMg0KICAgIHRoZW1lOiBmbGF0bHkNCi0tLQ0KDQoqKioNClExIFJlYWRpbmcgZmlsZQ0KYGBge3J9DQpmaWxlIDwtICJsaWd1ZTFfMTdfMTguY3N2Ig0KDQpkYXRhIDwtIHJlYWQuY3N2KGZpbGUsIHNlcCA9IjsiLCByb3cubmFtZXM9IDEpDQoNCnByaW50KGhlYWQoZGF0YSwgMikpDQpgYGA=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWs3Ig0Kc3VidGl0bGU6ICJDbHVzdGVyaW5nIg0KYXV0aG9yOiBTZWdhcmQgTmVpbA0KZGF0ZTogImByIGZvcm1hdChTeXMudGltZSgpKWAiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19kZXB0aDogMg0KICAgIHRoZW1lOiBmbGF0bHkNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShkcGx5cikNCmBgYA0KKioqDQpRMSBSZWFkaW5nIGZpbGUNCmBgYHtyfQ0KZmlsZSA8LSAibGlndWUxXzE3XzE4LmNzdiINCmRhdGEgPC0gcmVhZC5jc3YoZmlsZSwgc2VwID0iOyIsIHJvdy5uYW1lcz0gMSkNCmBgYA0KDQoqKioNClEyIFByaW50aW5nIGRhdGFmcmFtZSBpbmZvcw0KYGBge3J9DQpwcmludChoZWFkKGRhdGEsIDIpKQ0KYGBgDQoNCmBgYHtyfQ0KcHJpbnQobnJvdyhkYXRhKSkNCmBgYA0KDQpgYGB7cn0NCnRlc3QgPC0ga25pdHI6OmthYmxlKGRhdGFbMTo1LDE6NV0pDQpwcmludChoZWFkKHRlc3QpKQ0KYGBgDQoNCg0KKioqDQpRMyBQcmludGluZyBkYXRhZnJhbWUgaW5mb3MNCmBgYHtyfQ0KcG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsICJQb2ludHMiLCAieWVsbG93LmNhcmRzIikNCnByaW50KGhlYWQocG9pbnRzQ2FyZHMpKQ0KYGBgDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0K</div>
 
 
 

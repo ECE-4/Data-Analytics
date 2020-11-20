@@ -9,13 +9,71 @@ output:
     toc_depth: 2
     theme: flatly
 ---
-
+```{r}
+library(knitr)
+library(dplyr)
+```
 ***
 Q1 Reading file
 ```{r}
 file <- "ligue1_17_18.csv"
-
 data <- read.csv(file, sep =";", row.names= 1)
+```
 
+***
+Q2 Printing dataframe infos
+```{r}
 print(head(data, 2))
 ```
+
+```{r}
+print(nrow(data))
+```
+
+```{r}
+test <- knitr::kable(data[1:5,1:5])
+print(head(test))
+```
+
+
+***
+Q3 Printing dataframe infos
+```{r}
+pointsCards <- select(data, "Points", "yellow.cards")
+print(head(pointsCards))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
