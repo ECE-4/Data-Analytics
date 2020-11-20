@@ -79,6 +79,12 @@ Here are the centers
 ```{r}
 print(km$centers)
 ```
+***
+
+# Q7 Plotting centers
+```{r}
+plot(pointsCards, col = km$centers)
+```
 
 
 
