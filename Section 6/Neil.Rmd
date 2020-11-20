@@ -15,7 +15,7 @@ Q1 Reading file
 ```{r}
 file <- "ligue1_17_18.csv"
 
-data <- read.csv(file, sep =";")
+data <- read.csv(file, sep =";", row.names= 1)
 
 print(head(data, 2))
 ```
