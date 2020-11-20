@@ -81,9 +81,19 @@ print(km$centers)
 ```
 ***
 
+# Q7&8 Plotting centers
+```{r}
+plot(pointsCards, col = km$cluster)
+points(km$centers, pch=23)
+text(x = pointsCards, labels = rownames(pointsCards), col = km$cluster,
+     pos = 3, cex = 0.75)
+```
+
 # Q7 Plotting centers
 ```{r}
-plot(pointsCards, col = km$centers)
+plot(pointsCards, col = km$cluster)
+text(x = pointsCards, labels = rownames(pointsCards), col = km$cluster,
+     pos = 3, cex = 0.75)
 ```
 
 
