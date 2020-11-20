@@ -14,14 +14,14 @@ library(knitr)
 library(dplyr)
 ```
 ***
-Q1 Reading file
+# Q1 Reading file
 ```{r}
 file <- "ligue1_17_18.csv"
 data <- read.csv(file, sep =";", row.names= 1)
 ```
 
 ***
-Q2 Printing dataframe infos
+# Q2 Printing dataframe infos
 ```{r}
 print(head(data, 2))
 ```
@@ -37,14 +37,14 @@ print(head(test))
 
 
 ***
-Q3 Extracting columns
+# Q3 Extracting columns
 ```{r}
 pointsCards <- select(data, "Points", "yellow.cards")
 print(head(pointsCards))
 ```
 
 ***
-Q4 Applying kmeans
+# Q4 Applying kmeans
 ```{r}
 k<-2
 
@@ -54,7 +54,7 @@ km <- kmeans(pointsCards, k, iter.max = 20, nstart = 1,
 ```
 
 ***
-Q5 Description of km
+# Q5 Description of km
 ```{r}
 print(head(km))
 ```
@@ -73,6 +73,12 @@ kmeans returns an object of class "kmeans". Here we have:
 > betweenss: The between-cluster sum of squares.
 
 
+***
+# Q6 Centers
+Here are the centers
+```{r}
+print(km$centers)
+```
 
 
 

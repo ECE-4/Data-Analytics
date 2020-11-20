@@ -1813,10 +1813,20 @@ summary {
 <h1 class="title toc-ignore">Week7</h1>
 <h3 class="subtitle">Clustering</h3>
 <h4 class="author">Segard Neil</h4>
-<h4 class="date">2020-11-20 09:54:32</h4>
+<h4 class="date">2020-11-20 09:56:39</h4>
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#q1-reading-file">Q1 Reading file</a></li>
+<li><a href="#q2-printing-dataframe-infos">Q2 Printing dataframe infos</a></li>
+<li><a href="#q3-extracting-columns">Q3 Extracting columns</a></li>
+<li><a href="#q4-applying-kmeans">Q4 Applying kmeans</a></li>
+<li><a href="#q5-description-of-km">Q5 Description of km</a></li>
+<li><a href="#q6-centers">Q6 Centers</a></li>
+</ul>
+</div>
 
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -1828,7 +1838,8 @@ library(dplyr)</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <hr />
-<p>Q1 Reading file</p>
+<div id="q1-reading-file" class="section level1">
+<h1>Q1 Reading file</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZmlsZSA8LSBcImxpZ3VlMV8xN18xOC5jc3ZcIlxuZGF0YSA8LSByZWFkLmNzdihmaWxlLCBzZXAgPVwiO1wiLCByb3cubmFtZXM9IDEpXG5gYGAifQ== -->
@@ -1838,7 +1849,9 @@ data &lt;- read.csv(file, sep =&quot;;&quot;, row.names= 1)</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <hr />
-<p>Q2 Printing dataframe infos</p>
+</div>
+<div id="q2-printing-dataframe-infos" class="section level1">
+<h1>Q2 Printing dataframe infos</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoaGVhZChkYXRhLCAyKSlcbmBgYCJ9 -->
@@ -1880,7 +1893,9 @@ print(head(test))</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <hr />
-<p>Q3 Extracting columns</p>
+</div>
+<div id="q3-extracting-columns" class="section level1">
+<h1>Q3 Extracting columns</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsIFwiUG9pbnRzXCIsIFwieWVsbG93LmNhcmRzXCIpXG5wcmludChoZWFkKHBvaW50c0NhcmRzKSlcbmBgYCJ9 -->
@@ -1897,7 +1912,9 @@ print(head(pointsCards))</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <hr />
-<p>Q4 Applying kmeans</p>
+</div>
+<div id="q4-applying-kmeans" class="section level1">
+<h1>Q4 Applying kmeans</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuazwtMlxuXG5rbSA8LSBrbWVhbnMocG9pbnRzQ2FyZHMsIGssIGl0ZXIubWF4ID0gMjAsIG5zdGFydCA9IDEsXG4gICAgICAgYWxnb3JpdGhtID0gYyhcIkhhcnRpZ2FuLVdvbmdcIiwgXCJMbG95ZFwiLCBcIkZvcmd5XCIsXG4gICAgICAgICAgICAgICAgICAgICBcIk1hY1F1ZWVuXCIpLCB0cmFjZT1GQUxTRSlcbmBgYCJ9 -->
@@ -1910,31 +1927,33 @@ km &lt;- kmeans(pointsCards, k, iter.max = 20, nstart = 1,
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <hr />
-<p>Q5 Description of km</p>
+</div>
+<div id="q5-description-of-km" class="section level1">
+<h1>Q5 Description of km</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoaGVhZChrbSkpXG5gYGAifQ== -->
 <pre class="r"><code>print(head(km))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiJGNsdXN0ZXJcbiAgICAgUGFyaXMtU0cgICAgICAgIE1vbmFjbyAgICAgICAgICBMeW9uICAgICBNYXJzZWlsbGUgICAgICAgIFJlbm5lcyAgICAgIEJvcmRlYXV4IFNhaW50LUV0aWVubmUgXG4gICAgICAgICAgICAyICAgICAgICAgICAgIDIgICAgICAgICAgICAgMiAgICAgICAgICAgICAyICAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxIFxuICAgICAgICAgTmljZSAgICAgICAgTmFudGVzICAgTW9udHBlbGxpZXIgICAgICAgICBEaWpvbiAgICAgIEd1aW5nYW1wICAgICAgICBBbWllbnMgICAgICAgIEFuZ2VycyBcbiAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxICAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxICAgICAgICAgICAgIDEgXG4gICBTdHJhc2JvdXJnICAgICAgICAgIENhZW4gICAgICAgICBMaWxsZSAgICAgIFRvdWxvdXNlICAgICAgICBUcm95ZXMgICAgICAgICAgTWV0eiBcbiAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxICAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxIFxuXG4kY2VudGVyc1xuICBQb2ludHMgeWVsbG93LmNhcmRzXG4xICA0NC43NSAgICAgIDcxLjU2MjVcbjIgIDgyLjAwICAgICAgNzEuMjUwMFxuXG4kdG90c3NcblsxXSA2ODc4LjJcblxuJHdpdGhpbnNzXG5bMV0gMjE4MC45MzggIDI1Ni43NTBcblxuJHRvdC53aXRoaW5zc1xuWzFdIDI0MzcuNjg4XG5cbiRiZXR3ZWVuc3NcblsxXSA0NDQwLjUxMlxuIn0= -->
+<!-- rnb-output-begin eyJkYXRhIjoiJGNsdXN0ZXJcbiAgICAgUGFyaXMtU0cgICAgICAgIE1vbmFjbyAgICAgICAgICBMeW9uICAgICBNYXJzZWlsbGUgICAgICAgIFJlbm5lcyAgICAgIEJvcmRlYXV4IFNhaW50LUV0aWVubmUgXG4gICAgICAgICAgICAxICAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxICAgICAgICAgICAgIDIgICAgICAgICAgICAgMiAgICAgICAgICAgICAyIFxuICAgICAgICAgTmljZSAgICAgICAgTmFudGVzICAgTW9udHBlbGxpZXIgICAgICAgICBEaWpvbiAgICAgIEd1aW5nYW1wICAgICAgICBBbWllbnMgICAgICAgIEFuZ2VycyBcbiAgICAgICAgICAgIDIgICAgICAgICAgICAgMiAgICAgICAgICAgICAyICAgICAgICAgICAgIDIgICAgICAgICAgICAgMiAgICAgICAgICAgICAyICAgICAgICAgICAgIDIgXG4gICBTdHJhc2JvdXJnICAgICAgICAgIENhZW4gICAgICAgICBMaWxsZSAgICAgIFRvdWxvdXNlICAgICAgICBUcm95ZXMgICAgICAgICAgTWV0eiBcbiAgICAgICAgICAgIDIgICAgICAgICAgICAgMiAgICAgICAgICAgICAyICAgICAgICAgICAgIDIgICAgICAgICAgICAgMiAgICAgICAgICAgICAyIFxuXG4kY2VudGVyc1xuICBQb2ludHMgeWVsbG93LmNhcmRzXG4xICA4Mi4wMCAgICAgIDcxLjI1MDBcbjIgIDQ0Ljc1ICAgICAgNzEuNTYyNVxuXG4kdG90c3NcblsxXSA2ODc4LjJcblxuJHdpdGhpbnNzXG5bMV0gIDI1Ni43NTAgMjE4MC45MzhcblxuJHRvdC53aXRoaW5zc1xuWzFdIDI0MzcuNjg4XG5cbiRiZXR3ZWVuc3NcblsxXSA0NDQwLjUxMlxuIn0= -->
 <pre><code>$cluster
      Paris-SG        Monaco          Lyon     Marseille        Rennes      Bordeaux Saint-Etienne 
-            2             2             2             2             1             1             1 
+            1             1             1             1             2             2             2 
          Nice        Nantes   Montpellier         Dijon      Guingamp        Amiens        Angers 
-            1             1             1             1             1             1             1 
+            2             2             2             2             2             2             2 
    Strasbourg          Caen         Lille      Toulouse        Troyes          Metz 
-            1             1             1             1             1             1 
+            2             2             2             2             2             2 
 
 $centers
   Points yellow.cards
-1  44.75      71.5625
-2  82.00      71.2500
+1  82.00      71.2500
+2  44.75      71.5625
 
 $totss
 [1] 6878.2
 
 $withinss
-[1] 2180.938  256.750
+[1]  256.750 2180.938
 
 $tot.withinss
 [1] 2437.688
@@ -1953,9 +1972,27 @@ $betweenss
 <p>tot.withinss: Total within-cluster sum of squares.</p>
 <p>betweenss: The between-cluster sum of squares.</p>
 </blockquote>
+<hr />
+</div>
+<div id="q6-centers" class="section level1">
+<h1>Q6 Centers</h1>
+<p>Here are the centers</p>
 <!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoa20kY2VudGVycylcbmBgYCJ9 -->
+<pre class="r"><code>print(km$centers)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiICBQb2ludHMgeWVsbG93LmNhcmRzXG4xICA4Mi4wMCAgICAgIDcxLjI1MDBcbjIgIDQ0Ljc1ICAgICAgNzEuNTYyNVxuIn0= -->
+<pre><code>  Points yellow.cards
+1  82.00      71.2500
+2  44.75      71.5625</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWs3Ig0Kc3VidGl0bGU6ICJDbHVzdGVyaW5nIg0KYXV0aG9yOiBTZWdhcmQgTmVpbA0KZGF0ZTogImByIGZvcm1hdChTeXMudGltZSgpKWAiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19kZXB0aDogMg0KICAgIHRoZW1lOiBmbGF0bHkNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShkcGx5cikNCmBgYA0KKioqDQpRMSBSZWFkaW5nIGZpbGUNCmBgYHtyfQ0KZmlsZSA8LSAibGlndWUxXzE3XzE4LmNzdiINCmRhdGEgPC0gcmVhZC5jc3YoZmlsZSwgc2VwID0iOyIsIHJvdy5uYW1lcz0gMSkNCmBgYA0KDQoqKioNClEyIFByaW50aW5nIGRhdGFmcmFtZSBpbmZvcw0KYGBge3J9DQpwcmludChoZWFkKGRhdGEsIDIpKQ0KYGBgDQoNCmBgYHtyfQ0KcHJpbnQobnJvdyhkYXRhKSkNCmBgYA0KDQpgYGB7cn0NCnRlc3QgPC0ga25pdHI6OmthYmxlKGRhdGFbMTo1LDE6NV0pDQpwcmludChoZWFkKHRlc3QpKQ0KYGBgDQoNCg0KKioqDQpRMyBFeHRyYWN0aW5nIGNvbHVtbnMNCmBgYHtyfQ0KcG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsICJQb2ludHMiLCAieWVsbG93LmNhcmRzIikNCnByaW50KGhlYWQocG9pbnRzQ2FyZHMpKQ0KYGBgDQoNCioqKg0KUTQgQXBwbHlpbmcga21lYW5zDQpgYGB7cn0NCms8LTINCg0Ka20gPC0ga21lYW5zKHBvaW50c0NhcmRzLCBrLCBpdGVyLm1heCA9IDIwLCBuc3RhcnQgPSAxLA0KICAgICAgIGFsZ29yaXRobSA9IGMoIkhhcnRpZ2FuLVdvbmciLCAiTGxveWQiLCAiRm9yZ3kiLA0KICAgICAgICAgICAgICAgICAgICAgIk1hY1F1ZWVuIiksIHRyYWNlPUZBTFNFKQ0KYGBgDQoNCioqKg0KUTUgRGVzY3JpcHRpb24gb2Yga20NCmBgYHtyfQ0KcHJpbnQoaGVhZChrbSkpDQpgYGANCmttZWFucyByZXR1cm5zIGFuIG9iamVjdCBvZiBjbGFzcyAia21lYW5zIi4gSGVyZSB3ZSBoYXZlOg0KDQo+IGNsdXN0ZXI6IEEgdmVjdG9yIG9mIGludGVnZXJzIChmcm9tIDE6aykgaW5kaWNhdGluZyB0aGUgY2x1c3RlciB0byB3aGljaCBlYWNoIHBvaW50IGlzIGFsbG9jYXRlZC4NCj4gDQo+IGNlbnRlcnM6IEEgbWF0cml4IG9mIGNsdXN0ZXIgY2VudHJlcy4NCj4gDQo+IHRvdHNzOiBUaGUgdG90YWwgc3VtIG9mIHNxdWFyZXMuDQo+IA0KPiB3aXRoaW5zczogVmVjdG9yIG9mIHdpdGhpbi1jbHVzdGVyIHN1bSBvZiBzcXVhcmVzLCBvbmUgY29tcG9uZW50IHBlciBjbHVzdGVyLg0KPiANCj4gdG90LndpdGhpbnNzOiBUb3RhbCB3aXRoaW4tY2x1c3RlciBzdW0gb2Ygc3F1YXJlcy4NCj4gDQo+IGJldHdlZW5zczogVGhlIGJldHdlZW4tY2x1c3RlciBzdW0gb2Ygc3F1YXJlcy4NCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWs3Ig0Kc3VidGl0bGU6ICJDbHVzdGVyaW5nIg0KYXV0aG9yOiBTZWdhcmQgTmVpbA0KZGF0ZTogImByIGZvcm1hdChTeXMudGltZSgpKWAiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19kZXB0aDogMg0KICAgIHRoZW1lOiBmbGF0bHkNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShkcGx5cikNCmBgYA0KKioqDQojIFExIFJlYWRpbmcgZmlsZQ0KYGBge3J9DQpmaWxlIDwtICJsaWd1ZTFfMTdfMTguY3N2Ig0KZGF0YSA8LSByZWFkLmNzdihmaWxlLCBzZXAgPSI7Iiwgcm93Lm5hbWVzPSAxKQ0KYGBgDQoNCioqKg0KIyBRMiBQcmludGluZyBkYXRhZnJhbWUgaW5mb3MNCmBgYHtyfQ0KcHJpbnQoaGVhZChkYXRhLCAyKSkNCmBgYA0KDQpgYGB7cn0NCnByaW50KG5yb3coZGF0YSkpDQpgYGANCg0KYGBge3J9DQp0ZXN0IDwtIGtuaXRyOjprYWJsZShkYXRhWzE6NSwxOjVdKQ0KcHJpbnQoaGVhZCh0ZXN0KSkNCmBgYA0KDQoNCioqKg0KIyBRMyBFeHRyYWN0aW5nIGNvbHVtbnMNCmBgYHtyfQ0KcG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsICJQb2ludHMiLCAieWVsbG93LmNhcmRzIikNCnByaW50KGhlYWQocG9pbnRzQ2FyZHMpKQ0KYGBgDQoNCioqKg0KIyBRNCBBcHBseWluZyBrbWVhbnMNCmBgYHtyfQ0KazwtMg0KDQprbSA8LSBrbWVhbnMocG9pbnRzQ2FyZHMsIGssIGl0ZXIubWF4ID0gMjAsIG5zdGFydCA9IDEsDQogICAgICAgYWxnb3JpdGhtID0gYygiSGFydGlnYW4tV29uZyIsICJMbG95ZCIsICJGb3JneSIsDQogICAgICAgICAgICAgICAgICAgICAiTWFjUXVlZW4iKSwgdHJhY2U9RkFMU0UpDQpgYGANCg0KKioqDQojIFE1IERlc2NyaXB0aW9uIG9mIGttDQpgYGB7cn0NCnByaW50KGhlYWQoa20pKQ0KYGBgDQprbWVhbnMgcmV0dXJucyBhbiBvYmplY3Qgb2YgY2xhc3MgImttZWFucyIuIEhlcmUgd2UgaGF2ZToNCg0KPiBjbHVzdGVyOiBBIHZlY3RvciBvZiBpbnRlZ2VycyAoZnJvbSAxOmspIGluZGljYXRpbmcgdGhlIGNsdXN0ZXIgdG8gd2hpY2ggZWFjaCBwb2ludCBpcyBhbGxvY2F0ZWQuDQo+IA0KPiBjZW50ZXJzOiBBIG1hdHJpeCBvZiBjbHVzdGVyIGNlbnRyZXMuDQo+IA0KPiB0b3RzczogVGhlIHRvdGFsIHN1bSBvZiBzcXVhcmVzLg0KPiANCj4gd2l0aGluc3M6IFZlY3RvciBvZiB3aXRoaW4tY2x1c3RlciBzdW0gb2Ygc3F1YXJlcywgb25lIGNvbXBvbmVudCBwZXIgY2x1c3Rlci4NCj4gDQo+IHRvdC53aXRoaW5zczogVG90YWwgd2l0aGluLWNsdXN0ZXIgc3VtIG9mIHNxdWFyZXMuDQo+IA0KPiBiZXR3ZWVuc3M6IFRoZSBiZXR3ZWVuLWNsdXN0ZXIgc3VtIG9mIHNxdWFyZXMuDQoNCg0KKioqDQojIFE2IENlbnRlcnMNCkhlcmUgYXJlIHRoZSBjZW50ZXJzDQpgYGB7cn0NCnByaW50KGttJGNlbnRlcnMpDQpgYGANCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQo=</div>
 
 
 
