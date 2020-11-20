@@ -84,18 +84,37 @@ print(km$centers)
 # Q7&8 Plotting centers
 ```{r}
 plot(pointsCards, col = km$cluster)
-points(km$centers, pch=23)
+points(km$centers, pch=11)
 text(x = pointsCards, labels = rownames(pointsCards), col = km$cluster,
      pos = 3, cex = 0.75)
 ```
 
-# Q7 Plotting centers
+
+***
+# Q9 More kmeans
 ```{r}
+k<-3
+
+km <- kmeans(pointsCards, k, iter.max = 20, nstart = 1,
+       algorithm = c("Hartigan-Wong", "Lloyd", "Forgy",
+                     "MacQueen"), trace=FALSE)
 plot(pointsCards, col = km$cluster)
+points(km$centers, pch=11)
 text(x = pointsCards, labels = rownames(pointsCards), col = km$cluster,
      pos = 3, cex = 0.75)
 ```
 
+```{r}
+k<-4
+
+km <- kmeans(pointsCards, k, iter.max = 20, nstart = 1,
+       algorithm = c("Hartigan-Wong", "Lloyd", "Forgy",
+                     "MacQueen"), trace=FALSE)
+plot(pointsCards, col = km$cluster)
+points(km$centers, pch=11)
+text(x = pointsCards, labels = rownames(pointsCards), col = km$cluster,
+     pos = 3, cex = 0.75)
+```
 
 
 
