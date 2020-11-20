@@ -1,15 +1,21 @@
 ---
-title: "R Notebook"
-output: html_notebook
+title: "Week7"
+subtitle: "Clustering"
+author: Segard Neil
+date: "`r format(Sys.time())`"
+output: 
+  html_notebook:
+    toc: true
+    toc_depth: 2
+    theme: flatly
 ---
 
 ***
-Reading file
-
+Q1 Reading file
 ```{r}
 file <- "ligue1_17_18.csv"
 
 data <- read.csv(file, sep =";")
 
-print(head(data))
+print(head(data, 2))
 ```
