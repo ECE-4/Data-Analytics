@@ -53,6 +53,11 @@ km <- kmeans(pointsCards, k, iter.max = 20, nstart = 1,
                      "MacQueen"), trace=FALSE)
 ```
 
+***
+Q5 Description of km
+```{r}
+print(head(km))
+```
 
 
 
