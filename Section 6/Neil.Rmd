@@ -58,7 +58,19 @@ Q5 Description of km
 ```{r}
 print(head(km))
 ```
+kmeans returns an object of class "kmeans". Here we have:
 
+> cluster: A vector of integers (from 1:k) indicating the cluster to which each point is allocated.
+> 
+> centers: A matrix of cluster centres.
+> 
+> totss: The total sum of squares.
+> 
+> withinss: Vector of within-cluster sum of squares, one component per cluster.
+> 
+> tot.withinss: Total within-cluster sum of squares.
+> 
+> betweenss: The between-cluster sum of squares.
 
 
 

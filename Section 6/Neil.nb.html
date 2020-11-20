@@ -1813,7 +1813,7 @@ summary {
 <h1 class="title toc-ignore">Week7</h1>
 <h3 class="subtitle">Clustering</h3>
 <h4 class="author">Segard Neil</h4>
-<h4 class="date">2020-11-20 09:47:30</h4>
+<h4 class="date">2020-11-20 09:54:32</h4>
 
 </div>
 
@@ -1916,11 +1916,46 @@ km &lt;- kmeans(pointsCards, k, iter.max = 20, nstart = 1,
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucHJpbnQoaGVhZChrbSkpXG5gYGAifQ== -->
 <pre class="r"><code>print(head(km))</code></pre>
 <!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiJGNsdXN0ZXJcbiAgICAgUGFyaXMtU0cgICAgICAgIE1vbmFjbyAgICAgICAgICBMeW9uICAgICBNYXJzZWlsbGUgICAgICAgIFJlbm5lcyAgICAgIEJvcmRlYXV4IFNhaW50LUV0aWVubmUgXG4gICAgICAgICAgICAyICAgICAgICAgICAgIDIgICAgICAgICAgICAgMiAgICAgICAgICAgICAyICAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxIFxuICAgICAgICAgTmljZSAgICAgICAgTmFudGVzICAgTW9udHBlbGxpZXIgICAgICAgICBEaWpvbiAgICAgIEd1aW5nYW1wICAgICAgICBBbWllbnMgICAgICAgIEFuZ2VycyBcbiAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxICAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxICAgICAgICAgICAgIDEgXG4gICBTdHJhc2JvdXJnICAgICAgICAgIENhZW4gICAgICAgICBMaWxsZSAgICAgIFRvdWxvdXNlICAgICAgICBUcm95ZXMgICAgICAgICAgTWV0eiBcbiAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxICAgICAgICAgICAgIDEgICAgICAgICAgICAgMSAgICAgICAgICAgICAxIFxuXG4kY2VudGVyc1xuICBQb2ludHMgeWVsbG93LmNhcmRzXG4xICA0NC43NSAgICAgIDcxLjU2MjVcbjIgIDgyLjAwICAgICAgNzEuMjUwMFxuXG4kdG90c3NcblsxXSA2ODc4LjJcblxuJHdpdGhpbnNzXG5bMV0gMjE4MC45MzggIDI1Ni43NTBcblxuJHRvdC53aXRoaW5zc1xuWzFdIDI0MzcuNjg4XG5cbiRiZXR3ZWVuc3NcblsxXSA0NDQwLjUxMlxuIn0= -->
+<pre><code>$cluster
+     Paris-SG        Monaco          Lyon     Marseille        Rennes      Bordeaux Saint-Etienne 
+            2             2             2             2             1             1             1 
+         Nice        Nantes   Montpellier         Dijon      Guingamp        Amiens        Angers 
+            1             1             1             1             1             1             1 
+   Strasbourg          Caen         Lille      Toulouse        Troyes          Metz 
+            1             1             1             1             1             1 
+
+$centers
+  Points yellow.cards
+1  44.75      71.5625
+2  82.00      71.2500
+
+$totss
+[1] 6878.2
+
+$withinss
+[1] 2180.938  256.750
+
+$tot.withinss
+[1] 2437.688
+
+$betweenss
+[1] 4440.512</code></pre>
+<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>kmeans returns an object of class “kmeans”. Here we have:</p>
+<blockquote>
+<p>cluster: A vector of integers (from 1:k) indicating the cluster to which each point is allocated.</p>
+<p>centers: A matrix of cluster centres.</p>
+<p>totss: The total sum of squares.</p>
+<p>withinss: Vector of within-cluster sum of squares, one component per cluster.</p>
+<p>tot.withinss: Total within-cluster sum of squares.</p>
+<p>betweenss: The between-cluster sum of squares.</p>
+</blockquote>
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWs3Ig0Kc3VidGl0bGU6ICJDbHVzdGVyaW5nIg0KYXV0aG9yOiBTZWdhcmQgTmVpbA0KZGF0ZTogImByIGZvcm1hdChTeXMudGltZSgpKWAiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19kZXB0aDogMg0KICAgIHRoZW1lOiBmbGF0bHkNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShkcGx5cikNCmBgYA0KKioqDQpRMSBSZWFkaW5nIGZpbGUNCmBgYHtyfQ0KZmlsZSA8LSAibGlndWUxXzE3XzE4LmNzdiINCmRhdGEgPC0gcmVhZC5jc3YoZmlsZSwgc2VwID0iOyIsIHJvdy5uYW1lcz0gMSkNCmBgYA0KDQoqKioNClEyIFByaW50aW5nIGRhdGFmcmFtZSBpbmZvcw0KYGBge3J9DQpwcmludChoZWFkKGRhdGEsIDIpKQ0KYGBgDQoNCmBgYHtyfQ0KcHJpbnQobnJvdyhkYXRhKSkNCmBgYA0KDQpgYGB7cn0NCnRlc3QgPC0ga25pdHI6OmthYmxlKGRhdGFbMTo1LDE6NV0pDQpwcmludChoZWFkKHRlc3QpKQ0KYGBgDQoNCg0KKioqDQpRMyBFeHRyYWN0aW5nIGNvbHVtbnMNCmBgYHtyfQ0KcG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsICJQb2ludHMiLCAieWVsbG93LmNhcmRzIikNCnByaW50KGhlYWQocG9pbnRzQ2FyZHMpKQ0KYGBgDQoNCioqKg0KUTQgQXBwbHlpbmcga21lYW5zDQpgYGB7cn0NCms8LTINCg0Ka20gPC0ga21lYW5zKHBvaW50c0NhcmRzLCBrLCBpdGVyLm1heCA9IDIwLCBuc3RhcnQgPSAxLA0KICAgICAgIGFsZ29yaXRobSA9IGMoIkhhcnRpZ2FuLVdvbmciLCAiTGxveWQiLCAiRm9yZ3kiLA0KICAgICAgICAgICAgICAgICAgICAgIk1hY1F1ZWVuIiksIHRyYWNlPUZBTFNFKQ0KYGBgDQoNCioqKg0KUTUgRGVzY3JpcHRpb24gb2Yga20NCmBgYHtyfQ0KcHJpbnQoaGVhZChrbSkpDQpgYGANCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQo=</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWs3Ig0Kc3VidGl0bGU6ICJDbHVzdGVyaW5nIg0KYXV0aG9yOiBTZWdhcmQgTmVpbA0KZGF0ZTogImByIGZvcm1hdChTeXMudGltZSgpKWAiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19kZXB0aDogMg0KICAgIHRoZW1lOiBmbGF0bHkNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShkcGx5cikNCmBgYA0KKioqDQpRMSBSZWFkaW5nIGZpbGUNCmBgYHtyfQ0KZmlsZSA8LSAibGlndWUxXzE3XzE4LmNzdiINCmRhdGEgPC0gcmVhZC5jc3YoZmlsZSwgc2VwID0iOyIsIHJvdy5uYW1lcz0gMSkNCmBgYA0KDQoqKioNClEyIFByaW50aW5nIGRhdGFmcmFtZSBpbmZvcw0KYGBge3J9DQpwcmludChoZWFkKGRhdGEsIDIpKQ0KYGBgDQoNCmBgYHtyfQ0KcHJpbnQobnJvdyhkYXRhKSkNCmBgYA0KDQpgYGB7cn0NCnRlc3QgPC0ga25pdHI6OmthYmxlKGRhdGFbMTo1LDE6NV0pDQpwcmludChoZWFkKHRlc3QpKQ0KYGBgDQoNCg0KKioqDQpRMyBFeHRyYWN0aW5nIGNvbHVtbnMNCmBgYHtyfQ0KcG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsICJQb2ludHMiLCAieWVsbG93LmNhcmRzIikNCnByaW50KGhlYWQocG9pbnRzQ2FyZHMpKQ0KYGBgDQoNCioqKg0KUTQgQXBwbHlpbmcga21lYW5zDQpgYGB7cn0NCms8LTINCg0Ka20gPC0ga21lYW5zKHBvaW50c0NhcmRzLCBrLCBpdGVyLm1heCA9IDIwLCBuc3RhcnQgPSAxLA0KICAgICAgIGFsZ29yaXRobSA9IGMoIkhhcnRpZ2FuLVdvbmciLCAiTGxveWQiLCAiRm9yZ3kiLA0KICAgICAgICAgICAgICAgICAgICAgIk1hY1F1ZWVuIiksIHRyYWNlPUZBTFNFKQ0KYGBgDQoNCioqKg0KUTUgRGVzY3JpcHRpb24gb2Yga20NCmBgYHtyfQ0KcHJpbnQoaGVhZChrbSkpDQpgYGANCmttZWFucyByZXR1cm5zIGFuIG9iamVjdCBvZiBjbGFzcyAia21lYW5zIi4gSGVyZSB3ZSBoYXZlOg0KDQo+IGNsdXN0ZXI6IEEgdmVjdG9yIG9mIGludGVnZXJzIChmcm9tIDE6aykgaW5kaWNhdGluZyB0aGUgY2x1c3RlciB0byB3aGljaCBlYWNoIHBvaW50IGlzIGFsbG9jYXRlZC4NCj4gDQo+IGNlbnRlcnM6IEEgbWF0cml4IG9mIGNsdXN0ZXIgY2VudHJlcy4NCj4gDQo+IHRvdHNzOiBUaGUgdG90YWwgc3VtIG9mIHNxdWFyZXMuDQo+IA0KPiB3aXRoaW5zczogVmVjdG9yIG9mIHdpdGhpbi1jbHVzdGVyIHN1bSBvZiBzcXVhcmVzLCBvbmUgY29tcG9uZW50IHBlciBjbHVzdGVyLg0KPiANCj4gdG90LndpdGhpbnNzOiBUb3RhbCB3aXRoaW4tY2x1c3RlciBzdW0gb2Ygc3F1YXJlcy4NCj4gDQo+IGJldHdlZW5zczogVGhlIGJldHdlZW4tY2x1c3RlciBzdW0gb2Ygc3F1YXJlcy4NCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0K</div>
 
 
 
