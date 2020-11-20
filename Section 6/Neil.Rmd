@@ -37,13 +37,21 @@ print(head(test))
 
 
 ***
-Q3 Printing dataframe infos
+Q3 Extracting columns
 ```{r}
 pointsCards <- select(data, "Points", "yellow.cards")
 print(head(pointsCards))
 ```
 
+***
+Q4 Applying kmeans
+```{r}
+k<-2
 
+km <- kmeans(pointsCards, k, iter.max = 20, nstart = 1,
+       algorithm = c("Hartigan-Wong", "Lloyd", "Forgy",
+                     "MacQueen"), trace=FALSE)
+```
 
 
 

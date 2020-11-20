@@ -1813,7 +1813,7 @@ summary {
 <h1 class="title toc-ignore">Week7</h1>
 <h3 class="subtitle">Clustering</h3>
 <h4 class="author">Segard Neil</h4>
-<h4 class="date">2020-11-20 09:44:14</h4>
+<h4 class="date">2020-11-20 09:47:05</h4>
 
 </div>
 
@@ -1880,12 +1880,12 @@ print(head(test))</code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <hr />
-<p>Q3 Printing dataframe infos</p>
+<p>Q3 Extracting columns</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZXh0cmFjdCA8LSBzZWxlY3QoZGF0YSwgXCJQb2ludHNcIiwgXCJ5ZWxsb3cuY2FyZHNcIilcbnByaW50KGhlYWQoZXh0cmFjdCkpXG5gYGAifQ== -->
-<pre class="r"><code>extract &lt;- select(data, &quot;Points&quot;, &quot;yellow.cards&quot;)
-print(head(extract))</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxucG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsIFwiUG9pbnRzXCIsIFwieWVsbG93LmNhcmRzXCIpXG5wcmludChoZWFkKHBvaW50c0NhcmRzKSlcbmBgYCJ9 -->
+<pre class="r"><code>pointsCards &lt;- select(data, &quot;Points&quot;, &quot;yellow.cards&quot;)
+print(head(pointsCards))</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6Mn0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMVFVVXZETUJET3VyWnV4YW5nNzJqQmlRcStDRk1Vd1c1bHZ1ekZoN09OV295WGtiUzQvZm5wcFUyZzVPRWo5MzEzOTEzdTFnK2J5MlNUTU1iR0xHUUJHMGNVc3ZpK3VKaGZ6UmtMQTJJanlrek51Nk9xY3dxTU9ETmxoRGRDUVZnU2NzSXQ0V2FRWHhBZUxWYUVPOEt6Wnh3aC9IQk53VmxuM290eElXdHN0R1hIZXk2RS9NMUtVSlgyMnFlS0VrT0wyQ1ltQmFoYXA2OVB6aktYQ0tXMExIelpTM1FXT1NqTmF5RzRLMTF6Uk82bVR4WlNWUnphbmYveFVvQjJVNTJZVk5CQTlxSG9ROFFPWHN1UjNEYTFSR29LekNranIzbWtQT0cwUmJOYWxaWmZMWDZuMTJaQWwrNHhzMjg4aUlOK1pQQm5yU0szRThmUEd0MkdrWUIzTGl3NW9STjJGOHkyaXE3dU5pRlZaNDFzd05VbHBSUk82WFpqaDMvZVZjOGhRZ0lBQUE9PSJ9 -->
 <div data-pagedtable="false">
@@ -1896,9 +1896,22 @@ print(head(extract))</code></pre>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<hr />
+<p>Q4 Applying kmeans</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuazwtMlxuXG5rbSA8LSBrbWVhbnMocG9pbnRzQ2FyZHMsIGssIGl0ZXIubWF4ID0gMjAsIG5zdGFydCA9IDEsXG4gICAgICAgYWxnb3JpdGhtID0gYyhcIkhhcnRpZ2FuLVdvbmdcIiwgXCJMbG95ZFwiLCBcIkZvcmd5XCIsXG4gICAgICAgICAgICAgICAgICAgICBcIk1hY1F1ZWVuXCIpLCB0cmFjZT1GQUxTRSlcbmBgYCJ9 -->
+<pre class="r"><code>k&lt;-2
+
+km &lt;- kmeans(pointsCards, k, iter.max = 20, nstart = 1,
+       algorithm = c(&quot;Hartigan-Wong&quot;, &quot;Lloyd&quot;, &quot;Forgy&quot;,
+                     &quot;MacQueen&quot;), trace=FALSE)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWs3Ig0Kc3VidGl0bGU6ICJDbHVzdGVyaW5nIg0KYXV0aG9yOiBTZWdhcmQgTmVpbA0KZGF0ZTogImByIGZvcm1hdChTeXMudGltZSgpKWAiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19kZXB0aDogMg0KICAgIHRoZW1lOiBmbGF0bHkNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShkcGx5cikNCmBgYA0KKioqDQpRMSBSZWFkaW5nIGZpbGUNCmBgYHtyfQ0KZmlsZSA8LSAibGlndWUxXzE3XzE4LmNzdiINCmRhdGEgPC0gcmVhZC5jc3YoZmlsZSwgc2VwID0iOyIsIHJvdy5uYW1lcz0gMSkNCmBgYA0KDQoqKioNClEyIFByaW50aW5nIGRhdGFmcmFtZSBpbmZvcw0KYGBge3J9DQpwcmludChoZWFkKGRhdGEsIDIpKQ0KYGBgDQoNCmBgYHtyfQ0KcHJpbnQobnJvdyhkYXRhKSkNCmBgYA0KDQpgYGB7cn0NCnRlc3QgPC0ga25pdHI6OmthYmxlKGRhdGFbMTo1LDE6NV0pDQpwcmludChoZWFkKHRlc3QpKQ0KYGBgDQoNCg0KKioqDQpRMyBQcmludGluZyBkYXRhZnJhbWUgaW5mb3MNCmBgYHtyfQ0KcG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsICJQb2ludHMiLCAieWVsbG93LmNhcmRzIikNCnByaW50KGhlYWQocG9pbnRzQ2FyZHMpKQ0KYGBgDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0K</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIldlZWs3Ig0Kc3VidGl0bGU6ICJDbHVzdGVyaW5nIg0KYXV0aG9yOiBTZWdhcmQgTmVpbA0KZGF0ZTogImByIGZvcm1hdChTeXMudGltZSgpKWAiDQpvdXRwdXQ6IA0KICBodG1sX25vdGVib29rOg0KICAgIHRvYzogdHJ1ZQ0KICAgIHRvY19kZXB0aDogMg0KICAgIHRoZW1lOiBmbGF0bHkNCi0tLQ0KYGBge3J9DQpsaWJyYXJ5KGtuaXRyKQ0KbGlicmFyeShkcGx5cikNCmBgYA0KKioqDQpRMSBSZWFkaW5nIGZpbGUNCmBgYHtyfQ0KZmlsZSA8LSAibGlndWUxXzE3XzE4LmNzdiINCmRhdGEgPC0gcmVhZC5jc3YoZmlsZSwgc2VwID0iOyIsIHJvdy5uYW1lcz0gMSkNCmBgYA0KDQoqKioNClEyIFByaW50aW5nIGRhdGFmcmFtZSBpbmZvcw0KYGBge3J9DQpwcmludChoZWFkKGRhdGEsIDIpKQ0KYGBgDQoNCmBgYHtyfQ0KcHJpbnQobnJvdyhkYXRhKSkNCmBgYA0KDQpgYGB7cn0NCnRlc3QgPC0ga25pdHI6OmthYmxlKGRhdGFbMTo1LDE6NV0pDQpwcmludChoZWFkKHRlc3QpKQ0KYGBgDQoNCg0KKioqDQpRMyBFeHRyYWN0aW5nIGNvbHVtbnMNCmBgYHtyfQ0KcG9pbnRzQ2FyZHMgPC0gc2VsZWN0KGRhdGEsICJQb2ludHMiLCAieWVsbG93LmNhcmRzIikNCnByaW50KGhlYWQocG9pbnRzQ2FyZHMpKQ0KYGBgDQoNCioqKg0KUTQgQXBwbHlpbmcga21lYW5zDQpgYGB7cn0NCms8LTINCg0Ka20gPC0ga21lYW5zKHBvaW50c0NhcmRzLCBrLCBpdGVyLm1heCA9IDIwLCBuc3RhcnQgPSAxLA0KICAgICAgIGFsZ29yaXRobSA9IGMoIkhhcnRpZ2FuLVdvbmciLCAiTGxveWQiLCAiRm9yZ3kiLA0KICAgICAgICAgICAgICAgICAgICAgIk1hY1F1ZWVuIiksIHRyYWNlPUZBTFNFKQ0KYGBgDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQoNCg0KDQo=</div>
 
 
 
